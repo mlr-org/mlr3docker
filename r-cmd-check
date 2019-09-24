@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export NOT_CRAN=true
+export _R_CHECK_CRAN_INCOMING_REMOTE_=false
+export _R_CHECK_LENGTH_1_CONDITION_=true
+export _R_CHECK_LENGTH_1_LOGIC2_=true
+export _R_CHECK_TESTS_NLINES_=0
+
+r -e 'remotes::install_deps(dependencies = TRUE, upgrade = "always", Ncpus = parallel::detectCores())' && \
+r -e 'result = rcmdcheck::rcmdcheck(args = c("--as-cran", "--ignore-vignettes", "--no-manual")); q(status = result$status)'

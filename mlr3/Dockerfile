@@ -1,9 +1,8 @@
 FROM rocker/r-base:latest
 MAINTAINER "Michel Lang" michellang@gmail.com
+COPY r-cmd-check /usr/local/bin
 
-RUN ln -s /usr/lib/R/site-library/littler/examples/update.r /usr/local/bin/update.r \
-  && ln -s /usr/lib/R/site-library/littler/examples/rcc.r /usr/local/bin/rcc.r \
-  && apt-get update -qq \
+RUN apt-get update -qq \
   && apt-get install -y --no-install-recommends \
     pandoc \
     r-cran-remotes \
@@ -12,8 +11,7 @@ RUN ln -s /usr/lib/R/site-library/littler/examples/update.r /usr/local/bin/updat
   && rm -rf /tmp/* \
   && rm -rf /var/lib/apt/lists/*
 
-RUN update.r \
-  && install2.r -n -1 --error --deps=TRUE mlr3 \
+RUN r -e 'remotes::install_cran("mlr3", dependencies = TRUE, upgrade = "always", force = TRUE, Ncpus = parallel::detectCores())' \
   && rm -rf /tmp/*
 
 CMD ["R"]
