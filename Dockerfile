@@ -6,11 +6,5 @@ RUN apt-get update -qq \
     git \
     libicu-dev
 
-RUN install2.r --error \
-    remotes 
-
-RUN install2.r --error --deps=TRUE \
-    mlr3 \
-    mlr3learners \
-    mlr3db \
-    mlr3filters
+RUN install2.r --error remotes 
+RUN install2.r --error --deps=TRUE mlr3
