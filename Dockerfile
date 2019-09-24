@@ -9,11 +9,11 @@ RUN apt-get update -qq \
     default-jre-headless \
   && R CMD javareconf
 
-RUN install2.r -n 6 --error \
+RUN install2.r --error \
     remotes \
     rJava
 
-RUN install2.r -n 6 --error --deps=TRUE \
+RUN install2.r --error --deps=TRUE \
     mlr3 \
     mlr3learners \
     mlr3db \
