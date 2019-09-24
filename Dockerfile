@@ -4,14 +4,10 @@ MAINTAINER "Michel Lang" michellang@gmail.com
 RUN apt-get update -qq \
   && apt-get install -y --no-install-recommends \
     git \
-    libicu-dev \
-    default-jdk-headless \
-    default-jre-headless \
-  && R CMD javareconf
+    libicu-dev
 
 RUN install2.r --error \
-    remotes \
-    rJava
+    remotes 
 
 RUN install2.r --error --deps=TRUE \
     mlr3 \
