@@ -11,7 +11,7 @@ RUN apt-get update -qq \
   && rm -rf /tmp/* \
   && rm -rf /var/lib/apt/lists/*
 
-RUN r -e 'remotes::install_cran("mlr3", dependencies = TRUE, upgrade = "always", force = TRUE, Ncpus = parallel::detectCores())' \
+RUN r -e 'remotes::install_cran("mlr3", dependencies = TRUE, upgrade = "always", Ncpus = parallel::detectCores())' \
   && rm -rf /tmp/*
 
 CMD ["R"]
