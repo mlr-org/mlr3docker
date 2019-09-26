@@ -1,7 +1,5 @@
-FROM mllg/mlr3:latest
+FROM mllg/circleci-r:latest
 MAINTAINER "Michel Lang" michellang@gmail.com
 
-RUN r -e 'remotes::install_cran("mlr3learners", dependencies = TRUE, upgrade = "always", Ncpus = parallel::detectCores())' \
+RUN install2.r --deps=TRUE --ncpus=-1 mlr3learners \
   && rm -rf /tmp/*
-
-CMD ["R"]
