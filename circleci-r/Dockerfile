@@ -14,8 +14,6 @@ RUN apt-get update -qq \
     r-cran-remotes \
     r-cran-testthat \
     r-cran-rcmdcheck \
+  && r -e 'update.packages(ask = FALSE, Ncpus = parallel::detectCores())' \
   && rm -rf /tmp/* \
   && rm -rf /var/lib/apt/lists/*
-
-RUN r -e 'update.packages(ask = FALSE, Ncpus = parallel::detectCores())' \
-  && rm -rf /tmp/*
