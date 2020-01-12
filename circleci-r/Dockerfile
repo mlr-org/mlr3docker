@@ -10,9 +10,19 @@ ENV NOT_CRAN=true \
 
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     pandoc \
-    r-cran-remotes \
-    r-cran-testthat \
-    r-cran-rcmdcheck \
+    pandoc-citeproc \
+    ghostscript \
+    lmodern \
+    texinfo \
+    texlive-fonts-extra \
+    texlive-fonts-recommended \
+    texlive-latex-extra \
+    texlive-latex-recommended \
+    texlive-luatex \
+    texlive-plain-generic \
+    texlive-science \
+    texlive-xetex \
+    qpdf \
     && r -e 'update.packages(ask = FALSE, Ncpus = parallel::detectCores())' \
     && rm -rf /tmp/* \
     && rm -rf /var/lib/apt/lists/*
