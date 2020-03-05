@@ -23,6 +23,10 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     texlive-science \
     texlive-xetex \
     qpdf \
+    git \
+    neovim \
+    python3-neovim \
+    ripgrep \
     && r -e 'update.packages(ask = FALSE, Ncpus = parallel::detectCores())' \
     && rm -rf /tmp/* \
     && rm -rf /var/lib/apt/lists/*
