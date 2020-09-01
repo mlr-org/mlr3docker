@@ -1,4 +1,4 @@
-FROM mllg/r-check:latest
+FROM mlrorg/r-check:latest
 MAINTAINER "Michel Lang" michellang@gmail.com
 
 RUN apt-get update -qq \
