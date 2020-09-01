@@ -11,6 +11,8 @@ ENV NOT_CRAN=true \
     PATH="/usr/lib/R/site-library/littler/examples:${PATH}"
 
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+        git \
+        sudo \
         pandoc \
         pandoc-citeproc \
         ghostscript \
@@ -25,7 +27,6 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
         texlive-science \
         texlive-xetex \
         qpdf \
-        git \
         libicu-dev \
         default-jdk \
         libssl-dev \
@@ -34,4 +35,10 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
         r-cran-rmarkdown \
     && R CMD javareconf \
     && update.r --ncpus=-1 \
+    && adduser docker sudo \
+    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && rm -rf /tmp/* /var/lib/apt/lists/*
+
+USER docker
+RUN echo "R_LIBS_USER=/home/docker/r-library" > /home/docker/.Renviron \
+  && mkdir -p /home/docker/r-library \
