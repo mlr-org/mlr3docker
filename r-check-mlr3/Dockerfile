@@ -1,7 +1,6 @@
 FROM mlrorg/r-check:latest
 MAINTAINER "Michel Lang" michellang@gmail.com
 
-USER root
 RUN apt-get update -qq \
     && apt-get install -y --no-install-recommends --no-upgrade \
         r-cran-ggplot2 \
@@ -20,4 +19,7 @@ RUN apt-get update -qq \
     && install2.r --deps=TRUE --ncpus=-1 mlr3 mlr3verse \
     && rm -rf /tmp/* /var/lib/apt/lists/*
 
-USER docker
+# install all new packages into /r-lib;
+# these should be cached by the CI
+RUN mkdir -p /r-lib
+ENV R_LIBS="/r-lib"
