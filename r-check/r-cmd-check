@@ -1,5 +1,0 @@
-#!/usr/bin/env Rscript
-
-remotes::install_deps(dependencies = TRUE, upgrade = "always", Ncpus = parallel::detectCores())
-result = rcmdcheck::rcmdcheck(args = c("--as-cran", "--ignore-vignettes", "--no-manual"))
-q(status = result$status)
