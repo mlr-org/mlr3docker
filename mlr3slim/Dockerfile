@@ -6,4 +6,6 @@ LABEL org.opencontainers.image.licenses="GPL-3.0-or-later" \
 
 ARG NCPUS=${NCPUS:--1}
 
-RUN install2.r --error --skipinstalled -n ${NCPUS} mlr3verse
+RUN install2.r --error --skipinstalled --ncpus ${NCPUS} mlr3verse \
+    && rm -rf /tmp/downloaded_packages \
+    && strip /usr/local/lib/R/site-library/*/libs/*.so
