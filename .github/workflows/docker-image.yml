@@ -12,10 +12,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./mlr3slim
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up Docker Buildx
@@ -28,6 +24,6 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v4
       with:
-          context: .
+          context: mlr3slim
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/mlr3-slim:latest
