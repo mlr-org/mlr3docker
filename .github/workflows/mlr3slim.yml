@@ -26,4 +26,4 @@ jobs:
       with:
           context: mlr3slim
           push: true
-          tags: mlr3/mlr3-slim:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/mlr3-slim:latest
