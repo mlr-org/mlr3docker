@@ -25,6 +25,7 @@ RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE \
     mlr3hyperband \
     mlr3oml \
     mlr3verse \
+    mlr3learners \
     remotes \
     && installGithub.r mlr-org/mlr3proba \
     && installGithub.r --deps TRUE mlr-org/mlr3extralearners \
