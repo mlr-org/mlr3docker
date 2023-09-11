@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     liblzma-dev \
     libpcre2-dev \
     libxml2-dev \
+    libglpk40 \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
