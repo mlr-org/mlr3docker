@@ -3,8 +3,6 @@ name: Docker Image CI mlr3full
 on:
   push:
     branches: [main, master]
-  pull_request:
-    branches: [main, master]
   workflow_dispatch:
 
 jobs:
