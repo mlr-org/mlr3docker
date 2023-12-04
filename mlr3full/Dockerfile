@@ -5,6 +5,7 @@ LABEL org.opencontainers.image.licenses="GPL-3.0-or-later" \
     org.opencontainers.image.vendor="mlr-org"
 
 ARG NCPUS=${NCPUS:--1}
+ARG catboost_version=1.2.2
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     cmake \
@@ -28,7 +29,9 @@ RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE \
     mlr3verse \
     mlr3learners \
     remotes \
-    && installGithub.r mlr-org/mlr3proba \
+    BART \
+    && install2.r -r NULL -- --no-multiarch --no-test-load https://github.com/catboost/catboost/releases/download/v$catboost_version/catboost-R-Linux-$catboost_version.tgz \
+    && installGithub.r mlr-org/mlr3proba PlantedML/randomPlantedForest \
     && installGithub.r --deps TRUE mlr-org/mlr3extralearners \
     && rm -rf /tmp/downloaded_packages \
     && strip /usr/local/lib/R/site-library/*/libs/*.so
