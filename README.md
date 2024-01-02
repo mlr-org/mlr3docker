@@ -8,8 +8,8 @@
 
 ## Overview
 
-Docker Images for [mlr3](https://github.com/mlr-org/mlr3) on [Docker Hub](https://hub.docker.com/u/mlrorgdocker) for a [slim installation](https://hub.docker.com/r/mlrorgdocker/mlr3-slim) and a [full installation](https://hub.docker.com/r/mlrorgdocker/mlr3-full).
-You can trigger the build and push to Docker Hub manually for [the slim image](https://github.com/mlr-org/mlr3docker/actions/workflows/mlr3slim.yml) and [the full image](https://github.com/mlr-org/mlr3docker/actions/workflows/mlr3full.yml).
+This repository provides Docker images for the [mlr3](https://github.com/mlr-org/mlr3) project.
+Available on Docker Hub, we offer two distinct configurations: a [slim installation](https://hub.docker.com/r/mlrorgdocker/mlr3-slim) for a lightweight setup, and a [full installation](https://hub.docker.com/r/mlrorgdocker/mlr3-full) that includes all extensions and dependencies for comprehensive use.
 
 ## Usage
 
