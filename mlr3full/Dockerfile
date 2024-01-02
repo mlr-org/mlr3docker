@@ -7,7 +7,7 @@ LABEL org.opencontainers.image.licenses="GPL-3.0-or-later" \
 ARG NCPUS=${NCPUS:--1}
 ARG catboost_version=1.2.2
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     cmake \
     default-jdk \
     libbz2-dev \
