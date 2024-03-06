@@ -12,11 +12,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     default-jdk \
     libbz2-dev \
     libfontconfig1-dev \
+    libglpk-dev \
     libicu-dev \
     liblzma-dev \
     libpcre2-dev \
     libxml2-dev \
-    libglpk40 \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
