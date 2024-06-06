@@ -25,4 +25,5 @@ jobs:
         with:
           context: mlr3slim
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/mlr3-slim:latest
