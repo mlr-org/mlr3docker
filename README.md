@@ -1,9 +1,7 @@
 # mlr3docker
 
 <!-- badges: start -->
-
 [![license](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://opensource.org/licenses/GPL-3.0)
-
 <!-- badges: end -->
 
 ## Overview
@@ -15,8 +13,8 @@ Available on Docker Hub, we offer two distinct configurations: a [slim installat
 
 Get the image from [Docker Hub](https://hub.docker.com/u/mlrorgdocker):
 
-```
-docker pull docker.io/mlrorgdocker/mlr3-slim:latest
+```sh
+docker pull mlrorgdocker/mlr3-slim:latest
 ```
 
 ## Images
