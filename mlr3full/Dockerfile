@@ -5,12 +5,13 @@ LABEL org.opencontainers.image.licenses="GPL-3.0-or-later" \
     org.opencontainers.image.vendor="mlr-org"
 
 ARG NCPUS=${NCPUS:--1}
-ARG catboost_version=1.2.2
+ARG catboost_version=1.2.5
 
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     cmake \
     default-jdk \
     libbz2-dev \
+    libdeflate-dev \
     libfontconfig1-dev \
     libglpk-dev \
     libicu-dev \
