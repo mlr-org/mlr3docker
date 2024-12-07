@@ -32,8 +32,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     lmodern \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget
-https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.39/quarto-1.6.39-linux-${TARGETARCH}.deb && \
+RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.39/quarto-1.6.39-linux-${TARGETARCH}.deb && \
     apt-get install -y ./quarto-1.6.39-linux-${TARGETARCH}.deb
 
 RUN install2.r --error --skipinstalled --ncpus ${NCPUS} \
