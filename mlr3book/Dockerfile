@@ -31,8 +31,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     lmodern \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.56/quarto-1.5.56-linux-amd64.deb && \
-    apt-get install -y ./quarto-1.5.56-linux-amd64.deb
+RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.39/quarto-1.6.39-linux-${BUILDARCH}.deb && \
+    apt-get install -y ./quarto-1.6.39-linux-${BUILDARCH}.deb
 
 RUN install2.r --error --skipinstalled --ncpus ${NCPUS} \
     dbplyr \
