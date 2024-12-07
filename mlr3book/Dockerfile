@@ -6,6 +6,7 @@ LABEL org.opencontainers.image.licenses="GPL-3.0-or-later" \
 
 ARG NCPUS=${NCPUS:--1}
 ARG GH_PAT
+ARG TARGETARCH
 
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     cmake \
@@ -31,8 +32,9 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     lmodern \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.39/quarto-1.6.39-linux-${BUILDARCH}.deb && \
-    apt-get install -y ./quarto-1.6.39-linux-${BUILDARCH}.deb
+RUN wget
+https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.39/quarto-1.6.39-linux-${TARGETARCH}.deb && \
+    apt-get install -y ./quarto-1.6.39-linux-${TARGETARCH}.deb
 
 RUN install2.r --error --skipinstalled --ncpus ${NCPUS} \
     dbplyr \
