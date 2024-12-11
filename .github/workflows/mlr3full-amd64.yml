@@ -1,4 +1,4 @@
-name: Docker Image CI mlr3book
+name: Docker Image CI mlr3full
 
 on:
   push:
@@ -23,9 +23,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: mlr3book
-          platforms: linux/amd64, linux/arm64
+          context: mlr3full
+          platforms: linux/amd64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/mlr3-book:latest
-          build-args: |
-            GH_PAT=${{ secrets.GH_PAT }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/mlr3-full:latest
