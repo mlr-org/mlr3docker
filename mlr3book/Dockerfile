@@ -60,7 +60,6 @@ RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE \
     DALEXtra \
     counterfactuals \
     GenSA \
-    mlr3verse \
     mlr3oml \
     mlr3learners \
     survivalsvm \
@@ -73,6 +72,8 @@ RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE \
     fairml \
     randomForestSRC \
     lightgbm \
+    && installGithub.r mlr-org/mlr3proba \
+    && install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE mlr3verse \
     && rm -rf /tmp/downloaded_packages \
     && strip /usr/local/lib/R/site-library/*/libs/*.so
 
