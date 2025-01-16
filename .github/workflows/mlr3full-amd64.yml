@@ -1,4 +1,4 @@
-name: Docker Image CI mlr3full
+name: Docker Image CI mlr3full amd64
 
 on:
   push:

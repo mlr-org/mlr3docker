@@ -1,4 +1,4 @@
-name: Docker Image CI mlr3slim
+name: Docker Image CI mlr3slim arm64
 
 on:
   push:

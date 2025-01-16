@@ -1,4 +1,4 @@
-name: Docker Image CI mlr3book
+name: Docker Image CI mlr3book amd64
 
 on:
   push:
