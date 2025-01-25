@@ -30,6 +30,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     texlive-xetex \
     texlive-fonts-extra \
     lmodern \
+    rsync \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.39/quarto-1.6.39-linux-${TARGETARCH}.deb && \
