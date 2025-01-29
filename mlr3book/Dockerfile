@@ -84,8 +84,6 @@ RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE \
 
 RUN Rscript -e "torch::install_torch()"
 
-RUN npm install
-
 RUN GITHUB_PAT=${GH_PAT} installGithub.r \
     mlr-org/mlr3book \
     && rm -rf /tmp/downloaded_packages \
