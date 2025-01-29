@@ -23,6 +23,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     libxml2-dev \
     xz-utils \
     zlib1g-dev \
+    libudunits2-dev \
+    gdal-bin libgdal-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE \
