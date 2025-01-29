@@ -31,6 +31,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     texlive-fonts-extra \
     lmodern \
     rsync \
+    nodejs \
+    npm \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.39/quarto-1.6.39-linux-${TARGETARCH}.deb && \
@@ -63,6 +65,8 @@ RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE \
     GenSA \
     mlr3oml \
     mlr3learners \
+    mlr3torch \
+    mlr3inferr \
     survivalsvm \
     pendensity \
     ggdendro \
@@ -78,11 +82,16 @@ RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE \
     && rm -rf /tmp/downloaded_packages \
     && strip /usr/local/lib/R/site-library/*/libs/*.so
 
+RUN Rscript -e "torch::install_torch()"
+
+RUN npm install
+
 RUN GITHUB_PAT=${GH_PAT} installGithub.r \
     mlr-org/mlr3book \
     && rm -rf /tmp/downloaded_packages \
     && strip /usr/local/lib/R/site-library/*/libs/*.so
 
 RUN git clone https://github.com/mlr-org/mlr3book.git
+
 
 ENV PASSWORD=rstudio
