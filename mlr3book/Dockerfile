@@ -36,6 +36,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     libgit2-dev \
     libharfbuzz-dev libfribidi-dev \
     xz-utils \
+    libmpfr-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.39/quarto-1.6.39-linux-${TARGETARCH}.deb && \
