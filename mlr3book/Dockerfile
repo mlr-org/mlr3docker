@@ -76,7 +76,6 @@ RUN install2.r --error --skipinstalled --ncpus ${NCPUS} \
     kknn \
     magick \
     xgboost \
-    mlr3book \
     DiceKriging \
     rgenoud \
     FSelectorRcpp \
