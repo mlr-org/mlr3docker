@@ -26,6 +26,6 @@ jobs:
           context: mlr3book
           platforms: linux/amd64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/mlr3-book:latest
+          tags: mlrorg/mlr3-book:latest
           build-args: |
             GH_PAT=${{ secrets.GH_PAT }}
