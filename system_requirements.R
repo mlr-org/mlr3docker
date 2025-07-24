@@ -51,8 +51,7 @@ pkgs_book = c(
   "xml2"
 )
 
-# Query system dependencies for Ubuntu 22.04
-
+# query system dependencies for Ubuntu 22.04
 sysreq_book = pak::pkg_sysreqs(pkgs_book, sysreqs_platform = "ubuntu-22.04", dependencies = NA)
 sysreq_book = unlist(sysreq_book$packages$system_packages)
 
@@ -72,13 +71,24 @@ cat(paste(sort(sysreq_book), "\\"), sep = "\n")
 
 
 ## mlr3full
-
 pkg_full = c(
   "mlr3verse",
-  "mlr3proba",
+  "bbotk",
   "mlr3db",
+  "mlr3fairness",
+  "mlr3hyperband",
   "mlr3oml",
   "mlr3learners",
-  "mlr3torch",
-  "mlr3inferr"
+  "remotes",
+  "BART"
 )
+
+pak::repo_add(
+  mlr3universe = "https://mlr-org.r-universe.dev",
+  multiverse = "https://community.r-multiverse.org"
+)
+
+# query system dependencies for Ubuntu 22.04
+sysreq_full = pak::pkg_sysreqs(pkg_full, sysreqs_platform = "ubuntu-22.04", dependencies = TRUE)
+sysreq_full = unlist(sysreq_full$packages$system_packages)
+
