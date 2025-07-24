@@ -42,8 +42,9 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN Rscript -e "install.packages('pak')" \
-    && Rscript -e "pak::pak(c('mlr3verse'), dependencies = TRUE, ask = FALSE)"
+RUN Rscript -e "install.packages('pak'); \
+                pak::repo_add(mlr3universe = 'https://mlr-org.r-universe.dev', multiverse = 'https://community.r-multiverse.org'); \
+                pak::pak(c('mlr3verse'), dependencies = TRUE, ask = FALSE)"
 
 
 # RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE --repos https://packagemanager.posit.co/cran/latest https://community.r-multiverse.org \
