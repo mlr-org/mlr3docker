@@ -34,7 +34,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     texlive \
     texlive-xetex \
     texlive-fonts-extra \
-    fonts-lmodern \
+    lmodern \
+    xz-utils \
     && rm -rf /var/lib/apt/lists/*
 
 # install quarto
@@ -43,7 +44,7 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quar
 
 # install mlr3verse with suggested packages
 # additional repo is needed for mlr3proba
-RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --repos https://packagemanager.posit.co/cran/latest https://community.r-multiverse.org
+RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --repos https://packagemanager.posit.co/cran/latest https://community.r-multiverse.org \
     mlr3verse \
     && rm -rf /tmp/downloaded_packages \
     && strip /usr/local/lib/R/site-library/*/libs/*.so
