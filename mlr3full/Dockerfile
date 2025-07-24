@@ -18,6 +18,9 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 # install rust for polars
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
+# NOT_CRAN speeds up the installation of the polars package
+# additional repositories are needed for mlr3proba and polars
+# installing bbotk, mlr3learners, mlr3extralearners and mlr3db with suggests allows to use all optimizers, learners and databases
 RUN Rscript -e "Sys.setenv(NOT_CRAN = 'true'); \
                 install.packages('pak'); \
                 pak::repo_add(mlr3universe = 'https://mlr-org.r-universe.dev', multiverse = 'https://community.r-multiverse.org'); \

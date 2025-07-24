@@ -28,6 +28,9 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quarto-1.7.32-linux-${TARGETARCH}.deb && \
     apt-get install -y ./quarto-1.7.32-linux-${TARGETARCH}.deb
 
+# mlr3verse is installed with suggests
+# additional dependencies for the book are installed
+# mlr3book is installed without dependencies to not overwrite the mlr3verse packages
 RUN Rscript -e "install.packages('pak'); \
                 pak::repo_add(mlr3universe = 'https://mlr-org.r-universe.dev', multiverse = 'https://community.r-multiverse.org'); \
                 pak::pak(c('mlr3verse'), dependencies = TRUE, ask = FALSE); \
