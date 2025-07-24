@@ -44,7 +44,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 
 RUN Rscript -e "install.packages('pak'); \
                 pak::repo_add(mlr3universe = 'https://mlr-org.r-universe.dev', multiverse = 'https://community.r-multiverse.org'); \
-                pak::pak(c('mlr3verse'), dependencies = TRUE, ask = FALSE)"
+                pak::pak(c('mlr3verse','bbotk', 'mlr3db', 'mlr3fairness', 'mlr3hyperband', 'mlr3oml', 'mlr3learners', 'remotes', 'BART', 'mlr3extralearners', 'PlantedML/randomPlantedForest'), dependencies = TRUE, ask = FALSE);"
 
 
 # RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE --repos https://packagemanager.posit.co/cran/latest https://community.r-multiverse.org \
