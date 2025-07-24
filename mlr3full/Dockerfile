@@ -7,43 +7,15 @@ LABEL org.opencontainers.image.licenses="GPL-3.0-or-later" \
 ARG NCPUS=-1
 ARG catboost_version=1.2.7
 
-# system dependencies queried with pak::pkg_system_deps() on the R packages below
+# system dependencies for R packagas are installed with pak::pak()
+# libcurl4-openssl-dev is required for pak
+# curl is required for installing polars
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-#     cmake \
-      curl \
-#     default-jdk \
-#     gdal-bin \
-#     git \
-#     libabsl-dev \
-      libcurl4-openssl-dev \
-#     libfontconfig1-dev \
-#     libfreetype6-dev \
-#     libfribidi-dev \
-#     libgdal-dev \
-#     libgeos-dev \
-#     libgit2-dev \
-#     libglpk-dev \
-#     libgmp3-dev \
-#     libharfbuzz-dev \
-#     libhiredis-dev \
-#     libicu-dev \
-#     libmpfr-dev \
-#     libpng-dev \
-#     libproj-dev \
-#     libsqlite3-dev \
-#     libssh2-1-dev \
-#     libssl-dev \
-#     libudunits2-dev \
-#     libx11-dev \
-#     libxml2-dev \
-#     make \
-#     pandoc \
-#     python3 \
-#     xz-utils \
-#     zlib1g-dev \
+    curl \
+    libcurl4-openssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# install rush for polars
+# install rust for polars
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 RUN Rscript -e "Sys.setenv(NOT_CRAN = 'true'); \
