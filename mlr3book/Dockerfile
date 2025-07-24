@@ -52,52 +52,56 @@ RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --repos https://packagem
 # install additional packages
 # might be a dependency of the book or a needed suggested package
 RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --repos https://packagemanager.posit.co/cran/latest https://mlr-org.r-universe.dev \
-    remotes \
-    knitr \
-    rmarkdown \
-    GGally \
-    ggExtra \
-    precrec \
-    CVXR \
-    lhs \
-    nloptr \
     bestNormalize \
-    RSQLite \
-    nycflights13 \
-    PMCMRplus \
-    gbm \
-    iml \
+    counterfactuals \
+    CVXR \
     DALEX \
     DALEXtra \
-    counterfactuals \
-    GenSA \
-    survivalsvm \
-    pendensity \
-    ggdendro \
-    ggfortify \
-    dbscan \
-    ggtext \
-    linprog \
-    fairml \
-    randomForestSRC \
-    lightgbm \
-    qgam \
-    downlit \
-    xml2 \
-    ranger \
-    igraph \
-    kknn \
-    magick \
-    xgboost \
-    DiceKriging \
-    rgenoud \
-    FSelectorRcpp \
-    qs \
     dbplyr \
+    dbscan \
+    DiceKriging \
+    downlit \
     duckdb \
-    partykit \
-    quadprog \
+    fairml \
+    FSelectorRcpp \
+    gbm \
+    GenSA \
+    GGally \
+    ggdendro \
+    ggExtra \
+    ggfortify \
+    ggtext \
+    igraph \
+    iml \
+    kknn \
+    knitr \
+    lhs \
+    lightgbm \
+    linprog \
+    magick \
     maps \
+    mlr3inferr \
+    mlr3learners \
+    mlr3oml \
+    mlr3torch \
+    nloptr \
+    nycflights13 \
+    partykit \
+    pendensity \
+    PMCMRplus \
+    precrec \
+    qgam \
+    qs \
+    quadprog \
+    randomForestSRC \
+    ranger \
+    remotes \
+    rgenoud \
+    rmarkdown \
+    RSQLite \
+    survivalsvm \
+    xgboost \
+    xml2 \
     && rm -rf /tmp/downloaded_packages \
     && strip /usr/local/lib/R/site-library/*/libs/*.so
 
