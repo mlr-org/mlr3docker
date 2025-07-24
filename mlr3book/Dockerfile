@@ -8,7 +8,7 @@ ARG NCPUS=-1
 ARG GH_PAT
 ARG TARGETARCH
 
-# system dependencies for R packagas are installed with pak::pak()
+# system dependencies for R packages are installed with pak::pak()
 # libcurl4-openssl-dev is required for pak
 # additional dependencies:
 # texlive and fonts-lmodern for the book
@@ -34,7 +34,7 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quar
 RUN Rscript -e "install.packages('pak'); \
                 pak::repo_add(mlr3universe = 'https://mlr-org.r-universe.dev', multiverse = 'https://community.r-multiverse.org'); \
                 pak::pak(c('mlr3verse'), dependencies = TRUE, ask = FALSE); \
-                pak::pak(c('bestNormalize', 'counterfactuals', 'CVXR', 'DALEX', 'DALEXtra', 'dbplyr', 'dbscan', 'DiceKriging', 'downlit', 'duckdb', 'fairml', 'FSelectorRcpp', 'gbm', 'GenSA', 'GGally', 'ggdendro', 'ggExtra', 'ggfortify', 'ggtext', 'igraph', 'iml', 'kknn', 'knitr', 'lhs',  'lightgbm', 'linprog', 'magick', 'maps', 'nloptr', 'nycflights13', 'partykit',  'pendensity', 'PMCMRplus', 'precrec', 'qgam', 'qs', 'quadprog',  'randomForestSRC', 'ranger', 'remotes', 'rgenoud', 'rmarkdown',  'RSQLite', 'survivalsvm', 'xgboost', 'xml2'), dependencies = FALSE, ask = FALSE); \
+                pak::pak(c('bestNormalize', 'counterfactuals', 'CVXR', 'DALEX', 'DALEXtra', 'dbplyr', 'dbscan', 'DiceKriging', 'downlit', 'duckdb', 'fairml', 'FSelectorRcpp', 'gbm', 'GenSA', 'GGally', 'ggdendro', 'ggExtra', 'ggfortify', 'ggtext', 'igraph', 'iml', 'kknn', 'knitr', 'lhs',  'lightgbm', 'linprog', 'magick', 'maps', 'mlr3extralearners', 'nloptr', 'nycflights13', 'partykit',  'pendensity', 'PMCMRplus', 'precrec', 'qgam', 'qs', 'quadprog',  'randomForestSRC', 'ranger', 'remotes', 'rgenoud', 'rmarkdown',   'rprojroot', 'RSQLite', 'survivalsvm', 'xgboost', 'xml2'), dependencies = FALSE, ask = FALSE); \
                 torch::install_torch(); \
                 pak::pak('mlr-org/mlr3book', dependencies = FALSE, ask = FALSE);"
 

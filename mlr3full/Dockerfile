@@ -7,7 +7,7 @@ LABEL org.opencontainers.image.licenses="GPL-3.0-or-later" \
 ARG NCPUS=-1
 ARG catboost_version=1.2.7
 
-# system dependencies for R packagas are installed with pak::pak()
+# system dependencies for R packages are installed with pak::pak()
 # libcurl4-openssl-dev is required for pak
 # curl is required for installing polars
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
