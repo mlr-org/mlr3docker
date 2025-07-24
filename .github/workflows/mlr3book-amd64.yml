@@ -3,6 +3,7 @@ name: Docker Image CI mlr3book amd64
 on:
   push:
     branches: [main, master]
+  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -25,7 +26,7 @@ jobs:
         with:
           context: mlr3book
           platforms: linux/amd64
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: mlrorg/mlr3-book:latest
           build-args: |
             GH_PAT=${{ secrets.GH_PAT }}

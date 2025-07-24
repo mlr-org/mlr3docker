@@ -3,6 +3,7 @@ name: Docker Image CI mlr3slim amd64
 on:
   push:
     branches: [main, master]
+  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -25,5 +26,5 @@ jobs:
         with:
           context: mlr3slim
           platforms: linux/amd64
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: mlrorg/mlr3-slim:latest

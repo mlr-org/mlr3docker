@@ -8,38 +8,14 @@ ARG NCPUS=-1
 ARG GH_PAT
 ARG TARGETARCH
 
-# system dependencies queried with pak::pkg_system_deps() on the R packages below
-# and additional dependencies:
+# system dependencies for R packages are installed with pak::pak()
+# libcurl4-openssl-dev is required for pak
+# additional dependencies:
 # texlive and fonts-lmodern for the book
 # npm for quarto
 # rsync for deployment
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    cmake \
-    gdal-bin \
-    git \
-    gsfonts \
-    libabsl-dev \
     libcurl4-openssl-dev \
-    libgdal-dev \
-    libgeos-dev \
-    libglpk-dev \
-    libgmp3-dev \
-    libhiredis-dev \
-    libicu-dev \
-    libjpeg-dev \
-    libmagick++-dev \
-    libmpfr-dev \
-    libpng-dev \
-    libproj-dev \
-    libsqlite3-dev \
-    libssl-dev \
-    libudunits2-dev \
-    libx11-dev \
-    libxml2-dev \
-    make \
-    pandoc \
-    xz-utils \
-    zlib1g-dev \
     # additional dependencies
     texlive \
     texlive-xetex \
@@ -52,69 +28,18 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quarto-1.7.32-linux-${TARGETARCH}.deb && \
     apt-get install -y ./quarto-1.7.32-linux-${TARGETARCH}.deb
 
-RUN install2.r --error --skipinstalled --ncpus ${NCPUS} \
-    remotes \
-    knitr \
-    rmarkdown \
-    GGally \
-    ggExtra \
-    precrec \
-    CVXR \
-    lhs \
-    nloptr \
-    bestNormalize \
-    RSQLite \
-    nycflights13 \
-    PMCMRplus \
-    gbm \
-    iml \
-    DALEX \
-    DALEXtra \
-    counterfactuals \
-    GenSA \
-    mlr3oml \
-    mlr3learners \
-    mlr3torch \
-    mlr3inferr \
-    survivalsvm \
-    pendensity \
-    ggdendro \
-    ggfortify \
-    dbscan \
-    ggtext \
-    linprog \
-    fairml \
-    randomForestSRC \
-    lightgbm \
-    qgam \
-    downlit \
-    xml2 \
-    ranger \
-    igraph \
-    kknn \
-    magick \
-    xgboost \
-    DiceKriging \
-    rgenoud \
-    FSelectorRcpp \
-    qs \
-    dbplyr \
-    duckdb \
-    partykit \
-    quadprog \
-    maps \
-    && GITHUB_PAT=${GH_PAT} installGithub.r mlr-org/mlr3proba \
-    && install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE mlr3verse \
-    && rm -rf /tmp/downloaded_packages \
-    && strip /usr/local/lib/R/site-library/*/libs/*.so
-
-RUN Rscript -e "torch::install_torch()"
-
-RUN GITHUB_PAT=${GH_PAT} installGithub.r \
-    mlr-org/mlr3book \
-    && rm -rf /tmp/downloaded_packages \
-    && strip /usr/local/lib/R/site-library/*/libs/*.so
+# mlr3verse is installed with suggests
+# additional dependencies for the book are installed
+# mlr3book is installed without dependencies to not overwrite the mlr3verse packages
+RUN Rscript -e "install.packages('pak'); \
+                pak::repo_add(mlr3universe = 'https://mlr-org.r-universe.dev', multiverse = 'https://community.r-multiverse.org'); \
+                pak::pak(c('mlr3verse'), dependencies = TRUE, ask = FALSE); \
+                pak::pak(c('bestNormalize', 'counterfactuals', 'CVXR', 'DALEX', 'DALEXtra', 'dbplyr', 'dbscan', 'DiceKriging', 'downlit', 'duckdb', 'fairml', 'FSelectorRcpp', 'gbm', 'GenSA', 'GGally', 'ggdendro', 'ggExtra', 'ggfortify', 'ggtext', 'igraph', 'iml', 'kknn', 'knitr', 'lhs',  'lightgbm', 'linprog', 'magick', 'maps', 'mlr3extralearners', 'nloptr', 'nycflights13', 'partykit',  'pendensity', 'PMCMRplus', 'precrec', 'qgam', 'qs', 'quadprog',  'randomForestSRC', 'ranger', 'remotes', 'rgenoud', 'rmarkdown',   'rprojroot', 'RSQLite', 'survivalsvm', 'xgboost', 'xml2'), dependencies = FALSE, ask = FALSE); \
+                torch::install_torch(); \
+                pak::pak('mlr-org/mlr3book', dependencies = FALSE, ask = FALSE);"
 
 RUN git clone https://github.com/mlr-org/mlr3book.git
 
 ENV PASSWORD=rstudio
+
+
