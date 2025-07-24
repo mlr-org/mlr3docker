@@ -42,8 +42,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN Rscript -e "install.packages('pak') \
-                pak::pak('duckdb')"
+RUN Rscript -e "install.packages('pak')" \
+    && Rscript -e "pak::pak('duckdb')"
 
 # RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE --repos https://packagemanager.posit.co/cran/latest https://community.r-multiverse.org \
 #     duckdb \
