@@ -34,10 +34,12 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quar
 RUN Rscript -e "install.packages('pak'); \
                 pak::repo_add(mlr3universe = 'https://mlr-org.r-universe.dev', multiverse = 'https://community.r-multiverse.org'); \
                 pak::pak(c('mlr3verse'), dependencies = TRUE, ask = FALSE); \
-                pak::pak(c('remotes', 'knitr', 'rmarkdown', 'GGally', 'ggExtra', 'precrec', 'CVXR', 'lhs', 'nloptr', 'bestNormalize', 'RSQLite', 'nycflights13', 'PMCMRplus', 'gbm', 'iml', 'DALEX', 'DALEXtra', 'counterfactuals', 'GenSA', 'mlr3oml', 'mlr3learners', 'mlr3torch', 'mlr3inferr', 'survivalsvm', 'pendensity', 'ggdendro', 'ggfortify', 'dbscan', 'ggtext', 'linprog', 'fairml', 'randomForestSRC', 'lightgbm', 'qgam', 'downlit', 'xml2', 'ranger', 'igraph', 'kknn', 'magick', 'xgboost', 'DiceKriging', 'rgenoud', 'FSelectorRcpp', 'qs', 'dbplyr', 'duckdb', 'partykit', 'quadprog', 'maps'), dependencies = TRUE, ask = FALSE); \
+                pak::pak(c('bestNormalize', 'counterfactuals', 'CVXR', 'DALEX', 'DALEXtra', 'dbplyr', 'dbscan', 'DiceKriging', 'downlit', 'duckdb', 'fairml', 'FSelectorRcpp', 'gbm', 'GenSA', 'GGally', 'ggdendro', 'ggExtra', 'ggfortify', 'ggtext', 'igraph', 'iml', 'kknn', 'knitr', 'lhs',  'lightgbm', 'linprog', 'magick', 'maps', 'nloptr', 'nycflights13', 'partykit',  'pendensity', 'PMCMRplus', 'precrec', 'qgam', 'qs', 'quadprog',  'randomForestSRC', 'ranger', 'remotes', 'rgenoud', 'rmarkdown',  'RSQLite', 'survivalsvm', 'xgboost', 'xml2'), dependencies = FALSE, ask = FALSE); \
                 torch::install_torch(); \
                 pak::pak('mlr-org/mlr3book', dependencies = FALSE, ask = FALSE);"
 
 RUN git clone https://github.com/mlr-org/mlr3book.git
 
 ENV PASSWORD=rstudio
+
+
