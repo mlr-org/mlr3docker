@@ -27,7 +27,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     gdal-bin libgdal-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE \
+RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE --repos https://packagemanager.posit.co/cran/latest https://community.r-multiverse.org \
     bbotk \
     mlr3db \
     mlr3fairness \
