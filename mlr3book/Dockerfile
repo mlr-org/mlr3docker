@@ -42,6 +42,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     npm \
     libharfbuzz-dev \
     libfribidi-dev \
+    libfreetype6-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quarto-1.7.32-linux-${TARGETARCH}.deb && \
