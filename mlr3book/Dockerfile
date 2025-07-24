@@ -43,7 +43,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     npm \
     libharfbuzz-dev \
     libfribidi-dev \
-    libfreetype2-dev \
+    libmpfr-dev \
     rsync \
     && rm -rf /var/lib/apt/lists/*
 
