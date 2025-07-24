@@ -12,10 +12,10 @@ We also offer a container to build the mlr3 book.
 
 ## Usage
 
-Get the images from [Docker Hub](https://hub.docker.com/u/mlrorgdocker), e.g.:
+Get the images from [Docker Hub](https://hub.docker.com/u/mlrorg), e.g.:
 
 ```sh
-docker pull mlrorgdocker/mlr3-slim:latest
+docker pull mlrorg/mlr3-slim:latest
 ```
 
 ## Images
