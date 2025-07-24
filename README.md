@@ -12,10 +12,10 @@ We also offer a container to build the mlr3 book.
 
 ## Usage
 
-Get the images from [Docker Hub](https://hub.docker.com/u/mlrorgdocker), e.g.:
+Get the images from [Docker Hub](https://hub.docker.com/u/mlrorg), e.g.:
 
 ```sh
-docker pull mlrorgdocker/mlr3-slim:latest
+docker pull mlrorg/mlr3-slim:latest
 ```
 
 ## Images
@@ -25,6 +25,6 @@ See [rocker-versioned2](https://github.com/rocker-org/rocker-versioned2) repo fo
 
 | image                                                        | description                                           | metrics                                                                                                                |
 | ------------------------------------------------------------ | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| [mlr3-book](https://hub.docker.com/r/mlrorg/mlr3-book) | Container to build mlr3 book                          | [![](https://img.shields.io/docker/pulls/mlrorg/mlr3-book.svg)](https://hub.docker.com/r/mlrorg/mlr3-book) |
+| [mlr3-book](c/mlr3-book) | Container to build mlr3 book                          | [![](https://img.shields.io/docker/pulls/mlrorg/mlr3-book.svg)](https://hub.docker.com/r/mlrorg/mlr3-book) |
 | [mlr3-slim](https://hub.docker.com/r/mlrorg/mlr3-slim) | Adds mlr3verse                                        | [![](https://img.shields.io/docker/pulls/mlrorg/mlr3-slim.svg)](https://hub.docker.com/r/mlrorg/mlr3-slim) |
 | [mlr3-full](https://hub.docker.com/r/mlrorg/mlr3-full) | Adds mlr3verse & mlr3extralearners incl. dependencies | [![](https://img.shields.io/docker/pulls/mlrorg/mlr3-full.svg)](https://hub.docker.com/r/mlrorg/mlr3-slim) |
