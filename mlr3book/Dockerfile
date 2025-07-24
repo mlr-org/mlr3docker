@@ -14,32 +14,7 @@ ARG TARGETARCH
 # npm for quarto
 # rsync for deployment
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    cmake \
-    gdal-bin \
-    git \
-    gsfonts \
-    libabsl-dev \
     libcurl4-openssl-dev \
-    libgdal-dev \
-    libgeos-dev \
-    libglpk-dev \
-    libgmp3-dev \
-    libhiredis-dev \
-    libicu-dev \
-    libjpeg-dev \
-    libmagick++-dev \
-    libmpfr-dev \
-    libpng-dev \
-    libproj-dev \
-    libsqlite3-dev \
-    libssl-dev \
-    libudunits2-dev \
-    libx11-dev \
-    libxml2-dev \
-    make \
-    pandoc \
-    xz-utils \
-    zlib1g-dev \
     # additional dependencies
     texlive \
     texlive-xetex \
@@ -51,6 +26,10 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quarto-1.7.32-linux-${TARGETARCH}.deb && \
     apt-get install -y ./quarto-1.7.32-linux-${TARGETARCH}.deb
+
+RUN Rscript -e "install.packages('pak'); \
+                pak::repo_add(mlr3universe = 'https://mlr-org.r-universe.dev', multiverse = 'https://community.r-multiverse.org'); \
+                pak::pak(c('mlr3verse','bbotk', 'mlr3db', 'mlr3fairness', 'mlr3hyperband', 'mlr3oml', 'mlr3learners', 'remotes', 'BART', 'mlr3extralearners', 'PlantedML/randomPlantedForest'), dependencies = TRUE, ask = FALSE);"
 
 RUN install2.r --error --skipinstalled --ncpus ${NCPUS} \
     remotes \
