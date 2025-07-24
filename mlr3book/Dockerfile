@@ -55,7 +55,7 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quar
 
 # install mlr3verse with suggested packages
 # additional repo is needed for mlr3proba
-RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --repos --deps TRUE https://packagemanager.posit.co/cran/latest https://mlr-org.r-universe.dev https://community.r-multiverse.org \
+RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE --repos https://packagemanager.posit.co/cran/latest https://mlr-org.r-universe.dev https://community.r-multiverse.org \
     mlr3verse \
     && rm -rf /tmp/downloaded_packages \
     && strip /usr/local/lib/R/site-library/*/libs/*.so
