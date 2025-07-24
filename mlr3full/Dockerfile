@@ -51,10 +51,10 @@ RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE --repos http
     mlr3learners \
     remotes \
     BART \
-    && install2.r -r NULL -- --no-multiarch --no-test-load https://github.com/catboost/catboost/releases/download/v$catboost_version/catboost-R-Linux-$catboost_version.tgz \
-    && installGithub.r mlr-org/mlr3proba PlantedML/randomPlantedForest \
-    && install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE mlr3verse \
-    && installGithub.r --deps TRUE mlr-org/mlr3extralearners \
+    # && install2.r -r NULL -- --no-multiarch --no-test-load https://github.com/catboost/catboost/releases/download/v$catboost_version/catboost-R-Linux-$catboost_version.tgz \
+    # && installGithub.r mlr-org/mlr3proba PlantedML/randomPlantedForest \
+    # && install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE mlr3verse \
+    # && installGithub.r --deps TRUE mlr-org/mlr3extralearners \
     && rm -rf /tmp/downloaded_packages \
     && strip /usr/local/lib/R/site-library/*/libs/*.so
 
