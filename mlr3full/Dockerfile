@@ -43,14 +43,15 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE --repos https://packagemanager.posit.co/cran/latest https://community.r-multiverse.org \
-    bbotk \
-    mlr3db \
-    mlr3fairness \
-    mlr3hyperband \
-    mlr3oml \
-    mlr3learners \
-    remotes \
-    BART \
+    duckdb \
+    # bbotk \
+    # mlr3db \
+    # mlr3fairness \
+    # mlr3hyperband \
+    # mlr3oml \
+    # mlr3learners \
+    # remotes \
+    # BART \
     # && install2.r -r NULL -- --no-multiarch --no-test-load https://github.com/catboost/catboost/releases/download/v$catboost_version/catboost-R-Linux-$catboost_version.tgz \
     # && installGithub.r mlr-org/mlr3proba PlantedML/randomPlantedForest \
     # && install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE mlr3verse \
