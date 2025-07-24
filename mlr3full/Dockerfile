@@ -27,6 +27,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     gdal-bin libgdal-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# additional repo is needed for mlr3proba and polars dependency of mlr3db
 RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE --repos https://packagemanager.posit.co/cran/latest https://community.r-multiverse.org \
     bbotk \
     mlr3db \
