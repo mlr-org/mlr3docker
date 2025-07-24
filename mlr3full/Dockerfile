@@ -8,14 +8,14 @@ ARG NCPUS=-1
 ARG catboost_version=1.2.7
 
 # system dependencies queried with pak::pkg_system_deps() on the R packages below
-# RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 #     cmake \
 #     curl \
 #     default-jdk \
 #     gdal-bin \
 #     git \
 #     libabsl-dev \
-#     libcurl4-openssl-dev \
+      libcurl4-openssl-dev \
 #     libfontconfig1-dev \
 #     libfreetype6-dev \
 #     libfribidi-dev \
@@ -41,7 +41,7 @@ ARG catboost_version=1.2.7
 #     python3 \
 #     xz-utils \
 #     zlib1g-dev \
-#     && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 # install rush for polars
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
