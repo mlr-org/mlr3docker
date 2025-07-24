@@ -29,11 +29,13 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     libudunits2-dev \
     libproj-dev \
     libgdal-dev \
+    texlive \
+    texlive-xetex \
+    texlive-fonts-extra \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quarto-1.7.32-linux-${TARGETARCH}.deb && \
-    apt-get install -y ./quarto-1.7.32-linux-${TARGETARCH}.deb \
-    && quarto install tinytex
+    apt-get install -y ./quarto-1.7.32-linux-${TARGETARCH}.deb
 
 RUN install2.r --error --skipinstalled --ncpus ${NCPUS} \
     remotes \
