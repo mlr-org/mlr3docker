@@ -9,7 +9,6 @@ ARG catboost_version=1.2.7
 
 # system dependencies queried with pak::pkg_system_deps() on the R packages below
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    cargo \
     cmake \
     default-jdk \
     gdal-bin \
@@ -39,6 +38,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     make \
     pandoc \
     python3 \
+    rustc \
     xz-utils \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
