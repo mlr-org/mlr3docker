@@ -38,10 +38,11 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     make \
     pandoc \
     python3 \
-    rustc \
     xz-utils \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 RUN Rscript -e "install.packages('pak'); \
                 pak::repo_add(mlr3universe = 'https://mlr-org.r-universe.dev', multiverse = 'https://community.r-multiverse.org'); \
