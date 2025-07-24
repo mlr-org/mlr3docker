@@ -4,27 +4,42 @@ LABEL org.opencontainers.image.licenses="GPL-3.0-or-later" \
     org.opencontainers.image.source="https://github.com/mlr-org/mlr3docker" \
     org.opencontainers.image.vendor="mlr-org"
 
-ARG NCPUS=${NCPUS:--1}
+ARG NCPUS=-1
 ARG catboost_version=1.2.7
 
+# system dependencies queried with pak::pkg_system_deps() on the R packages below
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     cmake \
     default-jdk \
-    libbz2-dev \
+    gdal-bin \
+    git \
+    libabsl-dev \
     libcurl4-openssl-dev \
-    libdeflate-dev \
     libfontconfig1-dev \
+    libfreetype6-dev \
+    libfribidi-dev \
+    libgdal-dev \
+    libgeos-dev \
     libgit2-dev \
     libglpk-dev \
+    libgmp3-dev \
+    libharfbuzz-dev \
     libhiredis-dev \
     libicu-dev \
-    liblzma-dev \
-    libpcre2-dev \
+    libmpfr-dev \
+    libpng-dev \
+    libproj-dev \
+    libsqlite3-dev \
+    libssh2-1-dev \
+    libssl-dev \
+    libudunits2-dev \
+    libx11-dev \
     libxml2-dev \
+    make \
+    pandoc \
+    python3 \
     xz-utils \
     zlib1g-dev \
-    libudunits2-dev \
-    gdal-bin libgdal-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE --repos https://packagemanager.posit.co/cran/latest https://community.r-multiverse.org \

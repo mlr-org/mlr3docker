@@ -9,41 +9,43 @@ ARG GH_PAT
 ARG TARGETARCH
 
 # system dependencies queried with pak::pkg_system_deps() on the R packages below
+# and additional dependencies:
 # texlive and fonts-lmodern for the book
 # npm for quarto
-# xz-utils for duckdb on arm64
-# libharfbuzz-dev and libfribidi-dev for the textshaping on arm64
 # rsync for deployment
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    libicu-dev \
-    make \
-    libglpk-dev \
-    libxml2-dev \
-    git \
-    pandoc \
-    libssl-dev \
-    zlib1g-dev \
-    libgmp3-dev \
-    libmpfr-dev \
     cmake \
-    libcurl4-openssl-dev \
-    libjpeg-dev \
-    libpng-dev \
-    libx11-dev \
-    libmagick++-dev \
+    gdal-bin \
+    git \
     gsfonts \
-    libudunits2-dev \
-    libproj-dev \
+    libabsl-dev \
+    libcurl4-openssl-dev \
     libgdal-dev \
+    libgeos-dev \
+    libglpk-dev \
+    libgmp3-dev \
+    libhiredis-dev \
+    libicu-dev \
+    libjpeg-dev \
+    libmagick++-dev \
+    libmpfr-dev \
+    libpng-dev \
+    libproj-dev \
+    libsqlite3-dev \
+    libssl-dev \
+    libudunits2-dev \
+    libx11-dev \
+    libxml2-dev \
+    make \
+    pandoc \
+    xz-utils \
+    zlib1g-dev \
+    # additional dependencies
     texlive \
     texlive-xetex \
     texlive-fonts-extra \
     lmodern \
-    xz-utils \
     npm \
-    libharfbuzz-dev \
-    libfribidi-dev \
-    libmpfr-dev \
     rsync \
     && rm -rf /var/lib/apt/lists/*
 
