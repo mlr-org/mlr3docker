@@ -43,7 +43,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 RUN Rscript -e "install.packages('pak')" \
-    && Rscript -e "pak::pak('duckdb')"
+    && Rscript -e "pak::pak(c('mlr3verse'), deps = TRUE)"
+
 
 # RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --deps TRUE --repos https://packagemanager.posit.co/cran/latest https://community.r-multiverse.org \
 #     duckdb \
