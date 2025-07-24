@@ -46,7 +46,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 # install rush for polars
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-RUN Rscript -e "install.packages('pak'); \
+RUN Rscript -e "Sys.setenv(NOT_CRAN = 'true'); \
+                install.packages('pak'); \
                 pak::repo_add(mlr3universe = 'https://mlr-org.r-universe.dev', multiverse = 'https://community.r-multiverse.org'); \
                 pak::pak(c('mlr3verse','bbotk', 'mlr3db', 'mlr3fairness', 'mlr3hyperband', 'mlr3oml', 'mlr3learners', 'remotes', 'BART', 'mlr3extralearners', 'PlantedML/randomPlantedForest'), dependencies = TRUE, ask = FALSE);"
 
