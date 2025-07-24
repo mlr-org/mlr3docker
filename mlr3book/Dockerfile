@@ -13,6 +13,7 @@ ARG TARGETARCH
 # npm for quarto
 # xz-utils for duckdb on arm64
 # libharfbuzz-dev and libfribidi-dev for the textshaping on arm64
+# rsync for deployment
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     libicu-dev \
     make \
@@ -42,7 +43,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     npm \
     libharfbuzz-dev \
     libfribidi-dev \
-    libfreetype6-dev \
+    libfreetype2-dev \
+    rsync \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quarto-1.7.32-linux-${TARGETARCH}.deb && \
