@@ -8,34 +8,44 @@ ARG NCPUS=-1
 ARG GH_PAT
 ARG TARGETARCH
 
-# system dependencies queried with pak::pkg_system_deps() on the R packages below
-# plus texlive and fonts-lmodern for the book
+# system dependencies queried with system_requirements.R on the R packages below
+# texlive and lmodern for the book
+# npm for quarto
+# libharfbuzz-dev and libfribidi-dev for the textshaping on arm64
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    libicu-dev \
-    make \
-    libglpk-dev \
-    libxml2-dev \
-    git \
-    pandoc \
-    libssl-dev \
-    zlib1g-dev \
-    libgmp3-dev \
-    libmpfr-dev \
     cmake \
-    libcurl4-openssl-dev \
-    libjpeg-dev \
-    libpng-dev \
-    libx11-dev \
-    libmagick++-dev \
+    gdal-bin \
+    git \
     gsfonts \
-    libudunits2-dev \
-    libproj-dev \
+    libabsl-dev \
+    libcurl4-openssl-dev \
     libgdal-dev \
+    libgeos-dev \
+    libglpk-dev \
+    libgmp3-dev \
+    libhiredis-dev \
+    libicu-dev \
+    libjpeg-dev \
+    libmagick++-dev \
+    libmpfr-dev \
+    libpng-dev \
+    libproj-dev \
+    libsqlite3-dev \
+    libssl-dev \
+    libudunits2-dev \
+    libx11-dev \
+    libxml2-dev \
+    make \
+    pandoc \
+    xz-utils \
+    zlib1g-dev \
     texlive \
     texlive-xetex \
     texlive-fonts-extra \
     lmodern \
-    xz-utils \
+    npm \
+    libharfbuzz-dev \
+    libfribidi-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # install quarto
@@ -44,14 +54,14 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quar
 
 # install mlr3verse with suggested packages
 # additional repo is needed for mlr3proba
-RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --repos https://packagemanager.posit.co/cran/latest https://community.r-multiverse.org \
+RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --repos --deps TRUE https://packagemanager.posit.co/cran/latest https://mlr-org.r-universe.dev https://community.r-multiverse.org \
     mlr3verse \
     && rm -rf /tmp/downloaded_packages \
     && strip /usr/local/lib/R/site-library/*/libs/*.so
 
 # install additional packages
 # might be a dependency of the book or a needed suggested package
-RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --repos https://packagemanager.posit.co/cran/latest https://mlr-org.r-universe.dev \
+RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --repos https://packagemanager.posit.co/cran/latest https://mlr-org.r-universe.dev https://community.r-multiverse.org \
     bestNormalize \
     counterfactuals \
     CVXR \
@@ -80,10 +90,6 @@ RUN install2.r --error --skipinstalled --ncpus ${NCPUS} --repos https://packagem
     linprog \
     magick \
     maps \
-    mlr3inferr \
-    mlr3learners \
-    mlr3oml \
-    mlr3torch \
     nloptr \
     nycflights13 \
     partykit \
