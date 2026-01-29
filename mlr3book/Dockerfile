@@ -31,12 +31,12 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quar
 # mlr3verse is installed with suggests
 # additional dependencies for the book are installed
 # mlr3book is installed without dependencies to not overwrite the mlr3verse packages
-RUN Rscript -e "install.packages('pak'); \
-                pak::repo_add(mlr3universe = 'https://mlr-org.r-universe.dev', multiverse = 'https://community.r-multiverse.org'); \
-                pak::pak(c('mlr3verse'), dependencies = TRUE, ask = FALSE); \
-                pak::pak(c('bestNormalize', 'counterfactuals', 'CVXR', 'DALEX', 'DALEXtra', 'dbplyr', 'dbscan', 'DiceKriging', 'downlit', 'duckdb', 'fairml', 'FSelectorRcpp', 'gbm', 'GenSA', 'GGally', 'ggdendro', 'ggExtra', 'ggfortify', 'ggtext', 'here', 'igraph', 'iml', 'kknn', 'knitr', 'lhs',  'lightgbm', 'linprog', 'magick', 'maps', 'mlr3extralearners', 'nloptr', 'nycflights13', 'partykit',  'pendensity', 'PMCMRplus', 'precrec', 'qgam', 'qs', 'quadprog',  'randomForestSRC', 'ranger', 'remotes', 'rgenoud', 'rmarkdown',   'rprojroot', 'RSQLite', 'sessioninfo', 'survivalsvm', 'xgboost', 'xml2'), dependencies = NA, ask = FALSE); \
-                torch::install_torch(); \
-                pak::pak('mlr-org/mlr3book', dependencies = FALSE, ask = FALSE);"
+RUN Rscript -e "install.packages('pak');"
+RUN Rscript -e "pak::repo_add(mlr3universe = 'https://mlr-org.r-universe.dev', multiverse = 'https://community.r-multiverse.org');"
+RUN Rscript -e "pak::pak(c('mlr3verse'), dependencies = TRUE, ask = FALSE);"
+RUN Rscript -e "pak::pak(c('bestNormalize', 'counterfactuals', 'CVXR', 'DALEX', 'DALEXtra', 'dbplyr', 'dbscan', 'DiceKriging', 'downlit', 'duckdb', 'fairml', 'FSelectorRcpp', 'gbm', 'GenSA', 'GGally', 'ggdendro', 'ggExtra', 'ggfortify', 'ggtext', 'here', 'igraph', 'iml', 'kknn', 'knitr', 'lhs',  'lightgbm', 'linprog', 'magick', 'maps', 'mlr3extralearners', 'nloptr', 'nycflights13', 'partykit',  'pendensity', 'PMCMRplus', 'precrec', 'qgam', 'qs', 'quadprog',  'randomForestSRC', 'ranger', 'remotes', 'rgenoud', 'rmarkdown',   'rprojroot', 'RSQLite', 'sessioninfo', 'survivalsvm', 'xgboost', 'xml2'), dependencies = NA, ask = FALSE);"
+RUN Rscript -e "torch::install_torch();"
+RUN Rscript -e "pak::pak('mlr-org/mlr3book', dependencies = FALSE, ask = FALSE);"
 
 RUN git clone https://github.com/mlr-org/mlr3book.git
 
