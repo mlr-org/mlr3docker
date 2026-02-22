@@ -38,7 +38,16 @@ pak::pak(c(
     catboost_url,
     "mlr-org/mlr3cmprsk",
     "mlr-org/survdistr",
-    "mlr3verse", "bbotk", "mlr3db", "mlr3fairness", "mlr3hyperband", "mlr3oml", "mlr3learners", "BART", "PlantedML/randomPlantedForest", "mlr3extralearners"), dependencies = TRUE, ask = FALSE)
+    "mlr3verse",
+    "bbotk",
+    "mlr3db",
+    "mlr3fairness",
+    "mlr3hyperband",
+    "mlr3oml",
+    "mlr3learners",
+    "BART",
+    "PlantedML/randomPlantedForest",
+    "mlr3extralearners"), dependencies = TRUE, ask = FALSE)
 EOF
 
 ENV PASSWORD=rstudio
