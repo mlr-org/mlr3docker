@@ -21,8 +21,11 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 RUN Rscript - <<'EOF'
 Sys.setenv(NOT_CRAN = "true")
 install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
-pak::repo_add(mlr3universe = "https://mlr-org.r-universe.dev", multiverse = "https://community.r-multiverse.org")
-pak::pak(c("mlr3verse","bbotk", "mlr3db", "mlr3fairness", "mlr3hyperband", "mlr3oml", "mlr3learners", "remotes", "BART", "mlr3extralearners", "PlantedML/randomPlantedForest"), dependencies = TRUE, ask = FALSE)
+pak::repo_add(
+    mlr3universe = "https://mlr-org.r-universe.dev",
+    multiverse = "https://community.r-multiverse.org",
+    raphaels1 = "https://raphaels1.r-universe.dev")
+pak::pak(c("mlr3verse","bbotk", "mlr3db", "mlr3fairness", "mlr3hyperband", "mlr3oml", "mlr3learners", "remotes", "BART", "PlantedML/randomPlantedForest", "mlr3extralearners"), dependencies = TRUE, ask = FALSE)
 EOF
 
 ENV PASSWORD=rstudio
