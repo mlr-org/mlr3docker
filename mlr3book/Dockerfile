@@ -42,6 +42,7 @@ pak::pak(c(
     "mlr-org/mlr3cmprsk",
     "mlr-org/survdistr",
     "bestNormalize",
+    "clue",
     "counterfactuals",
     "CVXR",
     "DALEX",
