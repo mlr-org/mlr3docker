@@ -35,8 +35,7 @@ RUN Rscript - <<'EOF'
 install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/stable/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
 pak::repo_add(
     mlr3universe = "https://mlr-org.r-universe.dev",
-    multiverse = "https://community.r-multiverse.org",
-    raphaels1 = "https://raphaels1.r-universe.dev")
+    multiverse = "https://community.r-multiverse.org")
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
     "mlr-org/mlr3cmprsk",
