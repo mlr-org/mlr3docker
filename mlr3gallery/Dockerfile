@@ -22,6 +22,7 @@ pak::repo_add(
     raphaels1 = "https://raphaels1.r-universe.dev")
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
+    "mlr-org/mlr3website",
     "mlr-org/mlr3cmprsk",
     "mlr-org/survdistr",
     "adagio",
