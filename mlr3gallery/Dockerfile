@@ -50,6 +50,7 @@ pak::pak(c(
     "gridExtra",
     "gt",
     "klaR",
+    "kknn",
     "microbenchmark",
     "mlbench",
     "mlr3extralearners",
