@@ -14,6 +14,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # mlr3calibration is not on CRAN/r-universe, so it is installed from GitHub
+# mlr3website is installed without dependencies to not overwrite the mlr3verse packages
 RUN Rscript - <<'EOF'
 install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/rc/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
 pak::repo_add(
@@ -22,7 +23,6 @@ pak::repo_add(
     raphaels1 = "https://raphaels1.r-universe.dev")
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
-    "mlr-org/mlr3website",
     "mlr-org/mlr3cmprsk",
     "mlr-org/survdistr",
     "adagio",
@@ -81,6 +81,7 @@ pak::pak(c(
     "torchvision",
     "viridisLite"), ask = FALSE)
 torch::install_torch()
+pak::pak("mlr-org/mlr3website", dependencies = FALSE, ask = FALSE)
 EOF
 
 ENV PASSWORD=rstudio
