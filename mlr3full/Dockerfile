@@ -26,14 +26,13 @@ EOF
 # catboost is installed via architecture-specific binary URL
 # mlr3cmprsk and survdistr are not on r-universe so they are installed from their respective GitHub repositories
 RUN Rscript - <<'EOF'
-Sys.setenv(NOT_CRAN = "true")
+Sys.setenv(NOT_CRAN = "true", PKG_SYSREQS = "false")
 install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/stable/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
 cb_version = "1.2.10"
 catboost_url = paste0("url::https://github.com/catboost/catboost/releases/download/v", cb_version, "/catboost-R-linux-", Sys.info()[["machine"]], "-", cb_version, ".tgz")
 pak::repo_add(
     mlr3universe = "https://mlr-org.r-universe.dev",
-    multiverse = "https://community.r-multiverse.org",
-    raphaels1 = "https://raphaels1.r-universe.dev")
+    multiverse = "https://community.r-multiverse.org")
 pak::pak(c(
     catboost_url,
     "mlr-org/mlr3cmprsk",
