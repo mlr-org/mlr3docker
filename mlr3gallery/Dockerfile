@@ -89,7 +89,7 @@ pak::pak(c(
     "torchvision",
     "viridisLite"), ask = FALSE)
 torch::install_torch()
-pak::pak(c("precrec", "RSQLite", "DiceKriging", "FSelectorRcpp", "mlr-org/mlr3website"), dependencies = FALSE, ask = FALSE)
+pak::pak(c("precrec", "RSQLite", "DiceKriging", "FSelectorRcpp", "here", "mlr-org/mlr3website"), dependencies = FALSE, ask = FALSE)
 EOF
 
 ENV PASSWORD=rstudio
