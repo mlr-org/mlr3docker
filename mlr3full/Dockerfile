@@ -36,8 +36,7 @@ pak::repo_add(
     raphaels1 = "https://raphaels1.r-universe.dev")
 pak::pak(c(
     catboost_url,
-    "mlr-org/mlr3cmprsk",
-    "mlr-org/survdistr",
+    "mlr3cmprsk",
     "mlr3verse",
     "bbotk",
     "mlr3db",
