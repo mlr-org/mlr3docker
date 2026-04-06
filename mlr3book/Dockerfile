@@ -73,7 +73,6 @@ pak::pak(c(
     "nloptr",
     "nycflights13",
     "partykit",
-    "pendensity",
     "PMCMRplus",
     "precrec",
     "qgam",
