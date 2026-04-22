@@ -39,7 +39,7 @@ pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
     "mlr-org/mlr3book",
     "mlr-org/mlr3fairness@fix/register-classes-with-prototype-args",
-    "mlr-org/mlr3spatiotempcv@fix/use-load-dataset-for-tasks"
+    "mlr-org/mlr3spatiotempcv@fix/use-load-dataset-for-tasks",
     "bestNormalize",
     "clue",
     "counterfactuals",
