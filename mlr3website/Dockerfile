@@ -1,0 +1,95 @@
+FROM rocker/rstudio:latest
+
+LABEL org.opencontainers.image.licenses="GPL-3.0-or-later" \
+    org.opencontainers.image.source="https://github.com/mlr-org/mlr3docker" \
+    org.opencontainers.image.vendor="mlr-org"
+
+# system dependencies for R packages are installed with pak::pak()
+# libcurl4-openssl-dev is required for pak
+# libharfbuzz-dev and libfribidi-dev are required for textshaping/ragg (tidyverse dependency)
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    libcurl4-openssl-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# mlr3calibration is not on CRAN/r-universe, so it is installed from GitHub
+# mlr3website is installed without dependencies to not overwrite packages installed from r-universe
+RUN Rscript - <<'EOF'
+install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/rc/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
+pak::repo_add(
+    mlr3universe = "https://mlr-org.r-universe.dev",
+    multiverse = "https://community.r-multiverse.org")
+pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
+pak::pak(c(
+    "mlr3cmprsk",
+    "adagio",
+    "anytime",
+    "apcluster",
+    "BART",
+    "base64enc",
+    "bestNormalize",
+    "betacal",
+    "bst",
+    "clue",
+    "cowplot",
+    "DataExplorer",
+    "discrim",
+    "distr6",
+    "dplyr",
+    "DT",
+    "e1071",
+    "farff",
+    "fastICA",
+    "fastVoteR",
+    "giuseppec/mlr3calibration",
+    "GenSA",
+    "GGally",
+    "ggdendro",
+    "ggfortify",
+    "ggmap",
+    "ggparty",
+    "ggpubr",
+    "glmnet",
+    "gridExtra",
+    "gt",
+    "klaR",
+    "kknn",
+    "microbenchmark",
+    "mlbench",
+    "mlr3benchmark",
+    "mlr3extralearners",
+    "mlr3inferr",
+    "mlr3proba",
+    "mlr3spatial",
+    "mlr3torch",
+    "modeldata",
+    "mvtnorm",
+    "naniar",
+    "ooplah",
+    "OpenML",
+    "patchwork",
+    "plumber",
+    "PMCMRplus",
+    "praznik",
+    "probably",
+    "rchallenge",
+    "reactable",
+    "rgl",
+    "rpart.plot",
+    "sf",
+    "sessioninfo",
+    "skimr",
+    "smotefamily",
+    "terra",
+    "tidymodels",
+    "tidyr",
+    "tidyterra",
+    "tidyverse",
+    "torchvision",
+    "viridisLite"), ask = FALSE)
+torch::install_torch()
+pak::pak(c("precrec", "RSQLite", "DiceKriging", "FSelectorRcpp", "here", "mlr-org/mlr3website"), dependencies = FALSE, ask = FALSE)
+EOF
+
+ENV PASSWORD=rstudio
