@@ -30,7 +30,6 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quar
 
 # mlr3verse is installed with suggests
 # additional dependencies for the book are installed
-# mlr3book is installed without dependencies to not overwrite the mlr3verse packages
 RUN Rscript - <<'EOF'
 install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/stable/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
 pak::repo_add(
@@ -38,7 +37,7 @@ pak::repo_add(
     multiverse = "https://community.r-multiverse.org")
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
-    "mlr3cmprsk",
+    "mlr-org/mlr3book",
     "bestNormalize",
     "clue",
     "counterfactuals",
@@ -69,6 +68,7 @@ pak::pak(c(
     "linprog",
     "magick",
     "maps",
+    "mlr3cmprsk",
     "mlr3extralearners",
     "nloptr",
     "nycflights13",
@@ -90,7 +90,6 @@ pak::pak(c(
     "xgboost",
     "xml2"), dependencies = NA, ask = FALSE)
 torch::install_torch()
-pak::pak("mlr-org/mlr3book", dependencies = FALSE, ask = FALSE)
 EOF
 
 RUN git clone https://github.com/mlr-org/mlr3book.git
