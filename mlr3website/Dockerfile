@@ -23,6 +23,8 @@ pak::repo_add(
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
     "mlr-org/mlr3website",
+    "mlr-org/mlr3filters",
+    "mlr-org/mlr3pipelines@filter",
     "giuseppec/mlr3calibration",
     "adagio",
     "anytime",
