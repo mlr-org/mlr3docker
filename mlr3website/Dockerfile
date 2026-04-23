@@ -15,6 +15,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 
 # mlr3calibration is not on CRAN/r-universe, so it is installed from GitHub
 # mlr3website is installed without dependencies to not overwrite packages installed from r-universe
+# mlr3fairness, mlr3spatiotempcv, mlr3filters and mlr3pipelines fail to create a proper dictionary currently (23.04.2026)
 RUN Rscript - <<'EOF'
 install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/rc/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
 pak::repo_add(
@@ -23,6 +24,8 @@ pak::repo_add(
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
     "mlr-org/mlr3website",
+    "mlr-org/mlr3fairness",
+    "mlr-org/mlr3spatiotempcv",
     "mlr-org/mlr3filters",
     "mlr-org/mlr3pipelines@filter",
     "giuseppec/mlr3calibration",

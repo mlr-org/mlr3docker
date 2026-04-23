@@ -30,6 +30,7 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quar
 
 # mlr3verse is installed with suggests
 # additional dependencies for the book are installed
+# mlr3fairness and mlr3spatiotempcv fail to create a proper dictionary currently (23.04.2026)
 RUN Rscript - <<'EOF'
 install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/stable/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
 pak::repo_add(
@@ -39,7 +40,7 @@ pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
     "mlr-org/mlr3book",
     "mlr-org/mlr3fairness",
-    "mlr-org/mlr3spatiotempcv@fix/use-load-dataset-for-tasks",
+    "mlr-org/mlr3spatiotempcv",
     "bestNormalize",
     "clue",
     "counterfactuals",
