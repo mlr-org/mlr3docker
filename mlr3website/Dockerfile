@@ -22,7 +22,8 @@ pak::repo_add(
     multiverse = "https://community.r-multiverse.org")
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
-    "mlr3cmprsk",
+    "mlr-org/mlr3website",
+    "giuseppec/mlr3calibration",
     "adagio",
     "anytime",
     "apcluster",
@@ -34,6 +35,7 @@ pak::pak(c(
     "clue",
     "cowplot",
     "DataExplorer",
+    "DiceKriging",
     "discrim",
     "distr6",
     "dplyr",
@@ -42,7 +44,7 @@ pak::pak(c(
     "farff",
     "fastICA",
     "fastVoteR",
-    "giuseppec/mlr3calibration",
+    "FSelectorRcpp",
     "GenSA",
     "GGally",
     "ggdendro",
@@ -53,11 +55,13 @@ pak::pak(c(
     "glmnet",
     "gridExtra",
     "gt",
+    "here",
     "klaR",
     "kknn",
     "microbenchmark",
     "mlbench",
     "mlr3benchmark",
+    "mlr3cmprsk",
     "mlr3extralearners",
     "mlr3inferr",
     "mlr3proba",
@@ -72,11 +76,13 @@ pak::pak(c(
     "plumber",
     "PMCMRplus",
     "praznik",
+    "precrec",
     "probably",
     "rchallenge",
     "reactable",
     "rgl",
     "rpart.plot",
+    "RSQLite",
     "sf",
     "sessioninfo",
     "skimr",
@@ -89,7 +95,6 @@ pak::pak(c(
     "torchvision",
     "viridisLite"), ask = FALSE)
 torch::install_torch()
-pak::pak(c("precrec", "RSQLite", "DiceKriging", "FSelectorRcpp", "here", "mlr-org/mlr3website"), dependencies = FALSE, ask = FALSE)
 EOF
 
 ENV PASSWORD=rstudio
