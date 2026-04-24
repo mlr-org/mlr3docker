@@ -27,8 +27,8 @@ See [rocker-versioned2](https://github.com/rocker-org/rocker-versioned2) repo fo
 |--------------------------------------------------------------|-------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
 | [mlr3-book](https://hub.docker.com/r/mlrorg/mlr3-book)       | Container to build mlr3 book                          | [![](https://img.shields.io/docker/pulls/mlrorg/mlr3-book.svg)](https://hub.docker.com/r/mlrorg/mlr3-book)       |
 | [mlr3-slim](https://hub.docker.com/r/mlrorg/mlr3-slim)       | Adds mlr3verse                                        | [![](https://img.shields.io/docker/pulls/mlrorg/mlr3-slim.svg)](https://hub.docker.com/r/mlrorg/mlr3-slim)       |
-| [mlr3-full](https://hub.docker.com/r/mlrorg/mlr3-full)       | Adds mlr3verse & mlr3extralearners incl. dependencies | [![](https://img.shields.io/docker/pulls/mlrorg/mlr3-full.svg)](https://hub.docker.com/r/mlrorg/mlr3-slim)       |
-| [mlr3-gallery](https://hub.docker.com/r/mlrorg/mlr3-gallery) | Container to build mlr3 gallery                       | [![](https://img.shields.io/docker/pulls/mlrorg/mlr3-gallery.svg)](https://hub.docker.com/r/mlrorg/mlr3-gallery) |
+| [mlr3-full](https://hub.docker.com/r/mlrorg/mlr3-full)       | Adds mlr3verse & mlr3extralearners incl. dependencies | [![](https://img.shields.io/docker/pulls/mlrorg/mlr3-full.svg)](https://hub.docker.com/r/mlrorg/mlr3-full)       |
+| [mlr3-website](https://hub.docker.com/r/mlrorg/mlr3-website) | Container to build mlr3 website                       | [![](https://img.shields.io/docker/pulls/mlrorg/mlr3-website.svg)](https://hub.docker.com/r/mlrorg/mlr3-website) |
 
 # Build the images
 
