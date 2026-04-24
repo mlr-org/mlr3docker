@@ -33,6 +33,7 @@ pak::pak(c(
     "mlr3filters@0.9.1",
     "mlr-org/mlr3spatiotempcv",
     "mlr-org/mlr3pipelines@fix_flt_ensemble_dict",
+    "mlr-org/mlr3proba",
     "giuseppec/mlr3calibration",
     "adagio",
     "anytime",
