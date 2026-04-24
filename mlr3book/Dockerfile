@@ -23,6 +23,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     lmodern \
     npm \
     rsync \
+    # cargo is required for building clarabel (dependency of CVXR)
+    cargo \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quarto-1.7.32-linux-${TARGETARCH}.deb && \
