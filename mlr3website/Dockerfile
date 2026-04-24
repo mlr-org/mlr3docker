@@ -11,6 +11,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     libcurl4-openssl-dev \
     libharfbuzz-dev \
     libfribidi-dev \
+    rsync \
     && rm -rf /var/lib/apt/lists/*
 
 # mlr3calibration is not on CRAN/r-universe, so it is installed from GitHub
