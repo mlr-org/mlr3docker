@@ -18,7 +18,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 # mlr3website is installed without dependencies to not overwrite packages installed from r-universe
 # mlr3fairness, mlr3spatiotempcv, mlr3filters and mlr3pipelines fail to create a proper dictionary currently (23.04.2026)
 # mlr3proba fails to register in loaded packages.
-# Removed distr6 for mlr-org/mlr3proba because of dependency issues
+# Removed distr6, ooplah for mlr-org/mlr3proba because of dependency issues
 RUN Rscript - <<'EOF'
 install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/rc/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
 # CRAN is added as a fallback because rocker uses PPM by default,
@@ -81,7 +81,6 @@ pak::pak(c(
     "modeldata",
     "mvtnorm",
     "naniar",
-    "ooplah",
     "OpenML",
     "patchwork",
     "plumber",
