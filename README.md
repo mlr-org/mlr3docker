@@ -30,6 +30,15 @@ See [rocker-versioned2](https://github.com/rocker-org/rocker-versioned2) repo fo
 | [mlr3-full](https://hub.docker.com/r/mlrorg/mlr3-full)       | Adds mlr3verse & mlr3extralearners incl. dependencies | [![](https://img.shields.io/docker/pulls/mlrorg/mlr3-full.svg)](https://hub.docker.com/r/mlrorg/mlr3-full)       |
 | [mlr3-website](https://hub.docker.com/r/mlrorg/mlr3-website) | Container to build mlr3 website                       | [![](https://img.shields.io/docker/pulls/mlrorg/mlr3-website.svg)](https://hub.docker.com/r/mlrorg/mlr3-website) |
 
+## Package Repositories
+
+The images are based on [rocker](https://github.com/rocker-org/rocker-versioned2) which uses [Posit Package Manager (PPM)](https://packagemanager.posit.co/) as the default R package repository instead of CRAN.
+PPM provides pre-built Linux binaries which speeds up builds significantly.
+However, PPM can lag behind CRAN after new package releases.
+During this window, a newly released package may be missing from PPM entirely (the old version is removed before the new one is indexed).
+To avoid build failures, the Dockerfiles add CRAN (`https://cloud.r-project.org`) as a fallback repository (`CRAN2`).
+PPM remains the primary repository so that pre-built binaries are used when available.
+
 # Build the images
 
 Build the mlr3 book image:
