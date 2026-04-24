@@ -8,6 +8,10 @@ on:
   schedule:
     - cron: "0 3 * * 0"
 
+concurrency:
+  group: mlr3slim-multi-arch
+  cancel-in-progress: true
+
 env:
   IMAGE: mlrorg/mlr3-slim
 

@@ -6,6 +6,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+concurrency:
+  group: mlr3website-amd64
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
