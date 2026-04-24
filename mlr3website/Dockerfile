@@ -18,7 +18,10 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 # mlr3fairness, mlr3spatiotempcv, mlr3filters and mlr3pipelines fail to create a proper dictionary currently (23.04.2026)
 RUN Rscript - <<'EOF'
 install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/rc/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
+# CRAN is added as a fallback because rocker uses PPM by default,
+# which can lag behind CRAN after new package releases
 pak::repo_add(
+    CRAN = "https://cloud.r-project.org",
     mlr3universe = "https://mlr-org.r-universe.dev",
     multiverse = "https://community.r-multiverse.org")
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)

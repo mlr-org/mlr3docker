@@ -21,19 +21,20 @@ RUN Rscript - <<'EOF'
 EOF
 
 # NOT_CRAN speeds up the installation of the polars package
-# additional repositories are needed for mlr3proba and polars
+# additional repositories are needed for polars
 # installing bbotk, mlr3learners, mlr3extralearners and mlr3db with suggests allows to use all optimizers, learners and databases
 # catboost is installed via architecture-specific binary URL
-# mlr3cmprsk and survdistr are not on r-universe so they are installed from their respective GitHub repositories
 RUN Rscript - <<'EOF'
 Sys.setenv(NOT_CRAN = "true")
 install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/stable/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
 cb_version = "1.2.10"
 catboost_url = paste0("url::https://github.com/catboost/catboost/releases/download/v", cb_version, "/catboost-R-linux-", Sys.info()[["machine"]], "-", cb_version, ".tgz")
+# CRAN is added as a fallback because rocker uses PPM by default,
+# which can lag behind CRAN after new package releases
 pak::repo_add(
+    CRAN = "https://cloud.r-project.org",
     mlr3universe = "https://mlr-org.r-universe.dev",
-    multiverse = "https://community.r-multiverse.org",
-    raphaels1 = "https://raphaels1.r-universe.dev")
+    multiverse = "https://community.r-multiverse.org")
 pak::pak(c(
     catboost_url,
     "mlr3cmprsk",

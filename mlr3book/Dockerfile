@@ -33,7 +33,10 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quar
 # mlr3fairness and mlr3spatiotempcv fail to create a proper dictionary currently (23.04.2026)
 RUN Rscript - <<'EOF'
 install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/stable/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
+# CRAN is added as a fallback because rocker uses PPM by default,
+# which can lag behind CRAN after new package releases
 pak::repo_add(
+    CRAN = "https://cloud.r-project.org",
     mlr3universe = "https://mlr-org.r-universe.dev",
     multiverse = "https://community.r-multiverse.org")
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
