@@ -21,7 +21,7 @@ install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/rc/%s/%s/
 # CRAN is added as a fallback because rocker uses PPM by default,
 # which can lag behind CRAN after new package releases
 pak::repo_add(
-    CRAN = "https://cloud.r-project.org",
+    CRAN2 = "https://cloud.r-project.org",
     mlr3universe = "https://mlr-org.r-universe.dev",
     multiverse = "https://community.r-multiverse.org")
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
