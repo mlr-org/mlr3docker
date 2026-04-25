@@ -48,7 +48,7 @@ pak::pak(c(
     "BART",
     "PlantedML/randomPlantedForest",
     "mlr3extralearners"), dependencies = TRUE, ask = FALSE)
-torch::install_torch()
+if (Sys.info()[["machine"]] == "x86_64") torch::install_torch()
 EOF
 
 ENV PASSWORD=rstudio
