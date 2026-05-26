@@ -22,7 +22,7 @@ EOF
 
 # NOT_CRAN speeds up the installation of the polars package
 # additional repositories are needed for polars
-# installing bbotk, mlr3learners, mlr3extralearners and mlr3db with suggests allows to use all optimizers, learners and databases
+# installing bbotk, mlr3filters, mlr3learners, mlr3extralearners and mlr3db with suggests allows to use all optimizers, filters, learners and databases
 # catboost is installed via architecture-specific binary URL
 RUN Rscript - <<'EOF'
 Sys.setenv(NOT_CRAN = "true")
@@ -42,6 +42,7 @@ pak::pak(c(
     "bbotk",
     "mlr3db",
     "mlr3fairness",
+    "mlr3filters",
     "mlr3hyperband",
     "mlr3oml",
     "mlr3learners",
