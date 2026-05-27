@@ -7,11 +7,14 @@ LABEL org.opencontainers.image.licenses="GPL-3.0-or-later" \
 # system dependencies for R packages are installed with pak::pak()
 # libcurl4-openssl-dev is required for pak
 # libharfbuzz-dev and libfribidi-dev are required for textshaping/ragg (tidyverse dependency)
+# nodejs and npm are required for the netlify-cli used to deploy previews in CI
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     libcurl4-openssl-dev \
     libharfbuzz-dev \
     libfribidi-dev \
     rsync \
+    nodejs \
+    npm \
     && rm -rf /var/lib/apt/lists/*
 
 # mlr3calibration is not on CRAN/r-universe, so it is installed from GitHub
