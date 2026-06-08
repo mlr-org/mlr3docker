@@ -33,12 +33,11 @@ pak::repo_add(
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
     "mlr-org/mlr3website",
+    # the CRAN version of the following packages are broken
     "mlr-org/mlr3fairness",
-    # force latest version
-    "mlr3filters@0.9.1",
     "mlr-org/mlr3spatiotempcv",
-    "mlr-org/mlr3pipelines@fix_flt_ensemble_dict",
-    "mlr-org/mlr3proba",
+    "mlr-org/mlr3pipelines",
+    # packages for building the website
     "giuseppec/mlr3calibration",
     "adagio",
     "anytime",
