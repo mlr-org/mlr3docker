@@ -37,6 +37,7 @@ pak::pak(c(
     "mlr-org/mlr3fairness",
     "mlr-org/mlr3spatiotempcv",
     "mlr-org/mlr3pipelines",
+    "mlr-org/mlr3fda@metainf",
     # packages for building the website
     "giuseppec/mlr3calibration",
     "adagio",
