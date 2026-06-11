@@ -1,6 +1,6 @@
 .PHONY: pull-mlr3book pull-mlr3full pull-mlr3slim pull-mlr3website \
         bash-mlr3book bash-mlr3full bash-mlr3slim bash-mlr3website \
-        build-mlr3bookdev build-mlr3websitedev \
+        build-mlr3bookdev build-mlr3websitedev build-mlr3dev \
         start-mlr3bookdev start-mlr3websitedev
 
 pull-mlr3book:
@@ -32,6 +32,9 @@ build-mlr3bookdev: pull-mlr3book
 
 build-mlr3websitedev: pull-mlr3website
 	docker build -t mlrorg/mlr3-websitedev:latest mlr3websitedev
+
+build-mlr3dev:
+	docker build -t mlrorg/mlr3-dev:latest mlr3dev
 
 start-mlr3bookdev:
 	(cd mlr3bookdev && docker compose up -d)
