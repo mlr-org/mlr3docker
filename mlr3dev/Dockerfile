@@ -54,6 +54,8 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 # Mirror the mlr3full R-package install (catboost arch URL, multiverse repos, torch on x86_64).
 # NOT_CRAN speeds up the installation of the polars package.
 # CRAN is added as a fallback because PPM can lag behind CRAN after new package releases.
+# CACHE_BUST invalidates the build cache from this point so packages are always installed fresh.
+ARG CACHE_BUST=1
 RUN Rscript - <<'EOF'
 Sys.setenv(NOT_CRAN = "true")
 install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/stable/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
@@ -82,7 +84,7 @@ EOF
 
 # Install R dev packages.
 # GitHub install is done via remotes instead of pak because pak's bundled R6 lazy-load DB is corrupt in this base image and fails when building source packages.
-RUN Rscript -e 'pak::pak(c("devtools", "usethis", "lintr", "styler", "rcmdcheck", "covr", "pkgdown", "languageserver"), ask = FALSE)' \
+RUN Rscript -e 'pak::pak(c("devtools", "usethis", "lintr", "styler", "rcmdcheck", "covr", "pkgdown", "languageserver", "quarto"), ask = FALSE)' \
     && Rscript -e 'remotes::install_github("mlr-org/mlr3pkgdowntemplate", upgrade = "never")'
 
 # Install air (R formatter from Posit).

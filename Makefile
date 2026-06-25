@@ -34,7 +34,7 @@ build-mlr3websitedev: pull-mlr3website
 	docker build -t mlrorg/mlr3-websitedev:latest mlr3websitedev
 
 build-mlr3dev:
-	docker build -t mlrorg/mlr3-dev:latest mlr3dev
+	docker build --build-arg CACHE_BUST=$$(date +%s) -t mlrorg/mlr3-dev:latest mlr3dev
 
 start-mlr3bookdev:
 	(cd mlr3bookdev && docker compose up -d)
