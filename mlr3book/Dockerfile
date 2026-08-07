@@ -43,9 +43,12 @@ pak::repo_add(
     multiverse = "https://community.r-multiverse.org")
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
+    "mlr-org/mlr3", # pima replaced with diabetes in mlr3 1.8
+    "mlr-org/mlr3fselect", # compatibility with mlr3
+    "mlr-org/mlr3pipelines@remove-pima", # compatibility with mlr3
+    "mlr-org/mlr3benchmark@remove-pima", # compatibility with mlr3
     "mlr-org/mlr3book",
     "mlr-org/mlr3fairness",
-    "mlr-org/mlr3spatiotempcv",
     "bestNormalize",
     "clue",
     "counterfactuals",
