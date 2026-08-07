@@ -37,7 +37,7 @@ pak::pak(c(
     "mlr-org/mlr3", # pima replaced with diabetes in mlr3 1.8
     "mlr-org/mlr3fselect", # compatibility with mlr3
     "mlr-org/mlr3pipelines@remove-pima", # compatibility with mlr3
-    "mlr-org/mlr3benchmark@remove-pima", # compatibility with mlr3
+    "mlr-org/mlr3benchmark@remove-pima", # compatibility with mlr3, activate bellow
     # the CRAN version of the following packages are broken
     "mlr-org/mlr3fairness",
     # packages for building the website
@@ -77,7 +77,7 @@ pak::pak(c(
     "kknn",
     "microbenchmark",
     "mlbench",
-    "mlr3benchmark",
+    # "mlr3benchmark",
     "mlr3cmprsk",
     "mlr3extralearners",
     "mlr3inferr",
