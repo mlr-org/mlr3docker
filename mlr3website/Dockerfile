@@ -108,7 +108,9 @@ pak::pak(c(
     "tidyterra",
     "tidyverse",
     "torchvision",
-    "viridisLite"), ask = FALSE)
+    "viridisLite",
+    # was pulled in by mlr3calibration until its rewrite dropped the dependency
+    "xgboost"), ask = FALSE)
 torch::install_torch()
 EOF
 
