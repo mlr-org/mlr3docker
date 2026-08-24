@@ -34,10 +34,10 @@ pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
     "mlr-org/mlr3website",
     # missing pima task
-    "mlr-org/mlr3", # pima replaced with diabetes in mlr3 1.8
-    "mlr-org/mlr3fselect", # compatibility with mlr3
-    "mlr-org/mlr3pipelines@remove-pima", # compatibility with mlr3
-    "mlr-org/mlr3benchmark@remove-pima", # compatibility with mlr3, activate bellow
+    "mlr3>1.8.0",
+    "mlr3fselect>1.7.0",
+    "mlr-org/mlr3pipelines@remove-pima",
+    "mlr3benchmark>0.1.8",
     # the CRAN version of the following packages are broken
     "mlr-org/mlr3fairness",
     # packages for building the website
