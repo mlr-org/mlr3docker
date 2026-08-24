@@ -34,10 +34,7 @@ pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
     "mlr-org/mlr3website",
     # missing pima task
-    "mlr3>=1.8.0",
-    "mlr3fselect>=1.7.0",
     "mlr-org/mlr3pipelines@remove-pima",
-    "mlr3benchmark>=0.1.8",
     # the CRAN version of the following packages are broken
     "mlr-org/mlr3fairness",
     # packages for building the website
@@ -77,7 +74,9 @@ pak::pak(c(
     "kknn",
     "microbenchmark",
     "mlbench",
-    # "mlr3benchmark",
+    "mlr3",
+    "mlr3fselect",
+    "mlr3benchmark",
     "mlr3cmprsk",
     "mlr3extralearners",
     "mlr3inferr",
