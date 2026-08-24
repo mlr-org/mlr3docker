@@ -43,12 +43,11 @@ pak::repo_add(
     multiverse = "https://community.r-multiverse.org")
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
-    "mlr-org/mlr3", # pima replaced with diabetes in mlr3 1.8
-    "mlr-org/mlr3fselect", # compatibility with mlr3
-    "mlr-org/mlr3pipelines@remove-pima", # compatibility with mlr3
-    "mlr-org/mlr3benchmark@remove-pima", # compatibility with mlr3
     "mlr-org/mlr3book",
+    # the CRAN version of the following packages are broken
     "mlr-org/mlr3fairness",
+    # missing pima task
+    "mlr-org/mlr3pipelines@remove-pima",
     "bestNormalize",
     "clue",
     "counterfactuals",
