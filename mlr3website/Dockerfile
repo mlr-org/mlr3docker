@@ -33,8 +33,6 @@ pak::repo_add(
 pak::pak("mlr3verse", dependencies = TRUE, ask = FALSE)
 pak::pak(c(
     "mlr-org/mlr3website",
-    # missing pima task
-    "mlr-org/mlr3pipelines@remove-pima",
     # the CRAN version of the following packages are broken
     "mlr-org/mlr3fairness",
     # packages for building the website

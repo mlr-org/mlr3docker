@@ -46,8 +46,6 @@ pak::pak(c(
     "mlr-org/mlr3book",
     # the CRAN version of the following packages are broken
     "mlr-org/mlr3fairness",
-    # missing pima task
-    "mlr-org/mlr3pipelines@remove-pima",
     "bestNormalize",
     "clue",
     "counterfactuals",
