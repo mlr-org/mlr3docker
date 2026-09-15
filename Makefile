@@ -28,10 +28,10 @@ bash-mlr3website:
 	docker run --rm -it mlrorg/mlr3-website:latest bash
 
 build-mlr3bookdev: pull-mlr3book
-	docker build -t mlrorg/mlr3-bookdev:latest mlr3bookdev
+	docker build --build-arg CACHE_BUST=$$(date +%s) -t mlrorg/mlr3-bookdev:latest mlr3bookdev
 
 build-mlr3websitedev: pull-mlr3website
-	docker build -t mlrorg/mlr3-websitedev:latest mlr3websitedev
+	docker build --build-arg CACHE_BUST=$$(date +%s) -t mlrorg/mlr3-websitedev:latest mlr3websitedev
 
 build-mlr3dev:
 	docker build --build-arg CACHE_BUST=$$(date +%s) -t mlrorg/mlr3-dev:latest mlr3dev
