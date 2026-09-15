@@ -70,6 +70,7 @@ pak::pak(c(
     "here",
     "klaR",
     "kknn",
+    "libcmaesr",
     "microbenchmark",
     "mlbench",
     "mlr3",
