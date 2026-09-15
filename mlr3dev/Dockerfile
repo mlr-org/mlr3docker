@@ -92,6 +92,19 @@ RUN curl -LsSf https://github.com/posit-dev/air/releases/latest/download/air-ins
     && cp -L /root/.local/bin/air /usr/local/bin/air \
     && chmod +x /usr/local/bin/air
 
+# Miniforge provides a conda binary so reticulate can bind to conda environments,
+# such as the shared environment created by mlr3automl::install_python_learners().
+# PATH is appended (not prepended) so the base env python does not shadow the
+# system python or the uv-managed ephemeral environments used by reticulate.
+# RETICULATE_CONDA points reticulate at the binary without forcing conda usage.
+RUN ARCH="$(uname -m)" \
+    && curl -LsSf "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-${ARCH}.sh" -o /tmp/miniforge.sh \
+    && bash /tmp/miniforge.sh -b -p /opt/conda \
+    && rm -f /tmp/miniforge.sh \
+    && /opt/conda/bin/conda clean -afy
+ENV PATH="${PATH}:/opt/conda/bin"
+ENV RETICULATE_CONDA="/opt/conda/bin/conda"
+
 # Use HTTPS + gh credential helper for GitHub so $GH_TOKEN works for ssh-style remotes
 RUN printf '%s\n' \
     '[url "https://github.com/"]' \
