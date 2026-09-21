@@ -95,6 +95,7 @@ pak::pak(c(
     "RSQLite",
     "sessioninfo",
     "survivalsvm",
+    "torchvision",
     "xgboost",
     "xml2"), dependencies = NA, ask = FALSE)
 torch::install_torch()
