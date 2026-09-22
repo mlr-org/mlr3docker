@@ -41,6 +41,8 @@ jobs:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
+      actions: write
+      contents: read
       pages: write
       id-token: write
     environment:
@@ -60,6 +62,16 @@ jobs:
             -e GITHUB_SHA="${GITHUB_SHA}" \
             mlrorg/mlr3-book:latest Rscript - < pages/extract-packages.R > site/mlr3book.json
           test -s site/mlr3book.json
+      # a re-run keeps the artifact of the earlier attempt, and
+      # actions/deploy-pages refuses to deploy when it finds more than one
+      - name: Remove stale Pages artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts" \
+            --jq '.artifacts[] | select(.name == "github-pages") | .id' |
+            xargs -r -I {} gh api -X DELETE "repos/${GITHUB_REPOSITORY}/actions/artifacts/{}"
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
