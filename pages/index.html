@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mlr3docker packages</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1b1f24;
+    --muted: #5b6672;
+    --border: #d8dee4;
+    --accent: #0969da;
+    --row: #f6f8fa;
+    --chip: #eef1f4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --fg: #e6edf3;
+      --muted: #9198a1;
+      --border: #30363d;
+      --accent: #4493f8;
+      --row: #161b22;
+      --chip: #21262d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem 1rem 4rem;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  main { max-width: 60rem; margin: 0 auto; }
+  h1 { font-size: 1.5rem; margin: 0 0 .25rem; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .875rem; margin-bottom: 1.5rem; }
+  .meta code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-bottom: 1rem; }
+  input[type="search"] {
+    flex: 1 1 14rem;
+    min-width: 0;
+    padding: .5rem .75rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--fg);
+    font-size: .9375rem;
+  }
+  .chip {
+    padding: .35rem .7rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--chip);
+    color: var(--fg);
+    font-size: .8125rem;
+    cursor: pointer;
+  }
+  .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: .45rem .6rem; border-bottom: 1px solid var(--border); }
+  th { position: sticky; top: 0; background: var(--bg); cursor: pointer; white-space: nowrap; font-size: .8125rem; }
+  th::after { content: ""; }
+  th[aria-sort="ascending"]::after { content: " \25B2"; }
+  th[aria-sort="descending"]::after { content: " \25BC"; }
+  tbody tr:nth-child(even) { background: var(--row); }
+  td.version, td.ref { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .8125rem; }
+  td.ref { color: var(--muted); }
+  .count { color: var(--muted); font-size: .8125rem; margin-left: auto; }
+  @media (max-width: 40rem) {
+    body { padding: 1.5rem 1rem 3rem; }
+    .count { width: 100%; margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Packages in <span id="image">the mlr3 images</span></h1>
+  <p class="meta" id="meta">Loading&hellip;</p>
+
+  <div class="controls">
+    <input type="search" id="filter" placeholder="Filter packages&hellip;" autocomplete="off" spellcheck="false">
+    <span id="sources"></span>
+    <span class="count" id="count"></span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th data-key="package" aria-sort="ascending">Package</th>
+        <th data-key="version">Version</th>
+        <th data-key="source">Source</th>
+        <th data-key="ref">Reference</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+</main>
+
+<script>
+const state = {packages: [], query: "", source: null, key: "package", dir: 1};
+
+const el = id => document.getElementById(id);
+
+function render() {
+  const query = state.query.toLowerCase();
+  const rows = state.packages
+    .filter(p => !state.source || p.source === state.source)
+    .filter(p => !query || p.package.toLowerCase().includes(query) || (p.ref || "").toLowerCase().includes(query))
+    .sort((a, b) => {
+      const x = (a[state.key] || "").toLowerCase(), y = (b[state.key] || "").toLowerCase();
+      return (x < y ? -1 : x > y ? 1 : 0) * state.dir || a.package.localeCompare(b.package);
+    });
+
+  el("rows").replaceChildren(...rows.map(p => {
+    const tr = document.createElement("tr");
+    const name = document.createElement("td");
+    if (p.url) {
+      const a = document.createElement("a");
+      a.href = p.url;
+      a.textContent = p.package;
+      a.rel = "noreferrer";
+      name.append(a);
+    } else {
+      name.textContent = p.package;
+    }
+    const version = document.createElement("td");
+    version.className = "version";
+    version.textContent = p.version || "";
+    const source = document.createElement("td");
+    source.textContent = p.source || "";
+    const ref = document.createElement("td");
+    ref.className = "ref";
+    ref.textContent = p.ref || "";
+    tr.append(name, version, source, ref);
+    return tr;
+  }));
+
+  el("count").textContent = rows.length === state.packages.length
+    ? `${rows.length} packages`
+    : `${rows.length} of ${state.packages.length} packages`;
+}
+
+function setupSources() {
+  const counts = new Map();
+  for (const p of state.packages) counts.set(p.source, (counts.get(p.source) || 0) + 1);
+  const buttons = [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([source, n]) => {
+    const button = document.createElement("button");
+    button.className = "chip";
+    button.type = "button";
+    button.textContent = `${source} (${n})`;
+    button.setAttribute("aria-pressed", "false");
+    button.addEventListener("click", () => {
+      state.source = state.source === source ? null : source;
+      for (const other of el("sources").children) {
+        other.setAttribute("aria-pressed", String(other === button && state.source === source));
+      }
+      render();
+    });
+    return button;
+  });
+  el("sources").replaceChildren(...buttons);
+}
+
+for (const th of document.querySelectorAll("th[data-key]")) {
+  th.addEventListener("click", () => {
+    const key = th.dataset.key;
+    state.dir = state.key === key ? -state.dir : 1;
+    state.key = key;
+    for (const other of document.querySelectorAll("th[data-key]")) other.removeAttribute("aria-sort");
+    th.setAttribute("aria-sort", state.dir === 1 ? "ascending" : "descending");
+    render();
+  });
+}
+
+el("filter").addEventListener("input", event => {
+  state.query = event.target.value;
+  render();
+});
+
+fetch("mlr3book.json")
+  .then(response => response.json())
+  .then(data => {
+    state.packages = data.packages;
+    const meta = data.meta;
+    el("image").textContent = meta.image;
+    const parts = [
+      `Built ${meta.generated.replace("T", " ").replace(/Z$/, " UTC")}`,
+      meta.r_version,
+      meta.quarto_version ? `Quarto ${meta.quarto_version}` : null,
+      meta.commit ? `<a href="https://github.com/mlr-org/mlr3docker/commit/${meta.commit}"><code>${meta.commit.slice(0, 7)}</code></a>` : null
+    ].filter(Boolean);
+    el("meta").innerHTML = parts.join(" &middot; ") +
+      ` &middot; <a href="https://hub.docker.com/r/mlrorg/mlr3-book">Docker Hub</a>` +
+      ` &middot; <a href="mlr3book.json">JSON</a>`;
+    setupSources();
+    render();
+  })
+  .catch(error => {
+    el("meta").textContent = `Could not load mlr3book.json: ${error.message}`;
+  });
+</script>
+</body>
+</html>

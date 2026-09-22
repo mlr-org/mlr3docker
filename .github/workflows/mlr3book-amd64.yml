@@ -34,3 +34,36 @@ jobs:
           tags: mlrorg/mlr3-book:latest
           build-args: |
             GH_PAT=${{ secrets.GH_PAT }}
+
+  # Publishes the R library of the pushed image to GitHub Pages.
+  pages:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Pull image
+        run: docker pull mlrorg/mlr3-book:latest
+      - name: Extract installed packages
+        run: |
+          mkdir -p site
+          cp pages/index.html site/
+          docker run --rm -i \
+            -e IMAGE=mlrorg/mlr3-book:latest \
+            -e GITHUB_SHA="${GITHUB_SHA}" \
+            mlrorg/mlr3-book:latest Rscript - < pages/extract-packages.R > site/mlr3book.json
+          test -s site/mlr3book.json
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v5
