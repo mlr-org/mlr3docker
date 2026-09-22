@@ -38,6 +38,18 @@
   main { max-width: 60rem; margin: 0 auto; }
   h1 { font-size: 1.5rem; margin: 0 0 .25rem; }
   a { color: var(--accent); }
+  .tabs { display: flex; flex-wrap: wrap; gap: .25rem; margin: 1rem 0 .75rem; border-bottom: 1px solid var(--border); }
+  .tab {
+    padding: .5rem .85rem;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    font-size: .9375rem;
+    cursor: pointer;
+  }
+  .tab[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--accent); font-weight: 600; }
   .meta { color: var(--muted); font-size: .875rem; margin-bottom: 1.5rem; }
   .meta code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
   .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-bottom: 1rem; }
@@ -79,7 +91,8 @@
 </head>
 <body>
 <main>
-  <h1>Packages in <span id="image">the mlr3 images</span></h1>
+  <h1>Packages in the mlr3 images</h1>
+  <nav class="tabs" id="tabs"></nav>
   <p class="meta" id="meta">Loading&hellip;</p>
 
   <div class="controls">
@@ -102,7 +115,10 @@
 </main>
 
 <script>
-const state = {packages: [], query: "", source: null, key: "package", dir: 1};
+const state = {images: [], current: 0, packages: [], query: "", source: null, key: "package", dir: 1};
+
+// "mlrorg/mlr3-book:latest" -> "mlr3-book"
+const shortName = image => image.replace(/^[^/]+\//, "").replace(/:.*$/, "");
 
 const el = id => document.getElementById(id);
 
@@ -182,27 +198,55 @@ el("filter").addEventListener("input", event => {
   render();
 });
 
-fetch("mlr3book.json")
+function selectImage(index, push) {
+  state.current = index;
+  state.source = null;
+  const image = state.images[index];
+  state.packages = image.packages;
+
+  for (const tab of tabs.children) tab.setAttribute("aria-selected", String(Number(tab.dataset.index) === index));
+
+  const meta = image.meta;
+  const name = shortName(meta.image);
+  const parts = [
+    `<code>${meta.image}</code>`,
+    `built ${meta.generated.replace("T", " ").replace(/Z$/, " UTC")}`,
+    meta.r_version,
+    meta.quarto_version ? `Quarto ${meta.quarto_version}` : null,
+    `<a href="https://hub.docker.com/r/mlrorg/${name}">Docker Hub</a>`,
+    `<a href="packages.json">JSON</a>`
+  ].filter(Boolean);
+  el("meta").innerHTML = parts.join(" &middot; ");
+
+  if (push) history.replaceState(null, "", `#${name}`);
+  setupSources();
+  render();
+}
+
+const tabs = el("tabs");
+
+fetch("packages.json")
   .then(response => response.json())
   .then(data => {
-    state.packages = data.packages;
-    const meta = data.meta;
-    el("image").textContent = meta.image;
-    const parts = [
-      `Built ${meta.generated.replace("T", " ").replace(/Z$/, " UTC")}`,
-      meta.r_version,
-      meta.quarto_version ? `Quarto ${meta.quarto_version}` : null,
-      meta.commit ? `<a href="https://github.com/mlr-org/mlr3docker/commit/${meta.commit}"><code>${meta.commit.slice(0, 7)}</code></a>` : null
-    ].filter(Boolean);
-    el("meta").innerHTML = parts.join(" &middot; ") +
-      ` &middot; <a href="https://hub.docker.com/r/mlrorg/mlr3-book">Docker Hub</a>` +
-      ` &middot; <a href="mlr3book.json">JSON</a>`;
-    setupSources();
-    render();
+    state.images = data.images;
+    tabs.replaceChildren(...data.images.map((image, index) => {
+      const tab = document.createElement("button");
+      tab.className = "tab";
+      tab.type = "button";
+      tab.dataset.index = index;
+      tab.textContent = shortName(image.meta.image);
+      tab.setAttribute("aria-selected", "false");
+      tab.addEventListener("click", () => selectImage(index, true));
+      return tab;
+    }));
+
+    const requested = data.images.findIndex(image => shortName(image.meta.image) === location.hash.slice(1));
+    selectImage(requested === -1 ? 0 : requested, false);
   })
   .catch(error => {
-    el("meta").textContent = `Could not load mlr3book.json: ${error.message}`;
+    el("meta").textContent = `Could not load packages.json: ${error.message}`;
   });
+
 </script>
 </body>
 </html>
