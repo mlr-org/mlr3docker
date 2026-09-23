@@ -35,6 +35,7 @@ pak::pak(c(
     "mlr-org/mlr3website",
     # the CRAN version of the following packages are broken
     "mlr-org/mlr3fairness",
+    "mlr-org/mlr3cluster",
     # packages for building the website
     "giuseppec/mlr3calibration",
     "adagio",

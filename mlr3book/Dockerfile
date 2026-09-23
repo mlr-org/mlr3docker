@@ -46,6 +46,7 @@ pak::pak(c(
     "mlr-org/mlr3book",
     # the CRAN version of the following packages are broken
     "mlr-org/mlr3fairness",
+    "mlr-org/mlr3cluster",
     "bestNormalize",
     "clue",
     "counterfactuals",
