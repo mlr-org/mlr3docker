@@ -5,6 +5,9 @@ on:
     branches: [main, master]
   pull_request:
   workflow_dispatch:
+  # the website is rebuilt every Monday at 05:00, so the image picks up new package releases first
+  schedule:
+    - cron: "0 3 * * 0"
 
 concurrency:
   group: mlr3website-amd64
