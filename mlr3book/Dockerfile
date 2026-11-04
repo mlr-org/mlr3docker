@@ -32,7 +32,8 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.32/quar
 
 # mlr3verse is installed with suggests
 # additional dependencies for the book are installed
-# mlr3fairness and mlr3spatiotempcv fail to create a proper dictionary currently (23.04.2026)
+# mlr3book is not on CRAN, so it is installed from GitHub
+# mlr3fairness is installed from GitHub because the CRAN version fails to create a proper dictionary
 RUN Rscript - <<'EOF'
 install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/stable/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
 # CRAN is added as a fallback because rocker uses PPM by default,

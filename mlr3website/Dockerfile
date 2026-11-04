@@ -17,11 +17,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     npm \
     && rm -rf /var/lib/apt/lists/*
 
-# mlr3calibration is not on CRAN/r-universe, so it is installed from GitHub
-# mlr3website is installed without dependencies to not overwrite packages installed from r-universe
-# mlr3fairness, mlr3spatiotempcv, mlr3filters and mlr3pipelines fail to create a proper dictionary currently (23.04.2026)
-# mlr3proba fails to register in loaded packages.
-# Removed distr6, ooplah for mlr-org/mlr3proba because of dependency issues
+# mlr3website and mlr3calibration are not on CRAN, so they are installed from GitHub
+# mlr3fairness is installed from GitHub because the CRAN version fails to create a proper dictionary
 RUN Rscript - <<'EOF'
 install.packages('pak', repos = sprintf('https://r-lib.github.io/p/pak/rc/%s/%s/%s', .Platform$pkgType, R.Version()$os, R.Version()$arch))
 # CRAN is added as a fallback because rocker uses PPM by default,
