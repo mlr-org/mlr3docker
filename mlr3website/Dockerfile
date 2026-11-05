@@ -76,6 +76,7 @@ pak::pak(c(
     "mlr3cmprsk",
     "mlr3extralearners",
     "mlr3inferr",
+    "mlr3resampling",
     "mlr3spatial",
     "mlr3torch",
     "modeldata",
