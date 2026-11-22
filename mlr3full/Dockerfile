@@ -34,7 +34,8 @@ catboost_url = paste0("url::https://github.com/catboost/catboost/releases/downlo
 pak::repo_add(
     CRAN2 = "https://cloud.r-project.org",
     mlr3universe = "https://mlr-org.r-universe.dev",
-    multiverse = "https://community.r-multiverse.org")
+    multiverse = "https://community.r-multiverse.org",
+    plantedml = "https://plantedml.r-universe.dev")
 pak::pak(c(
     catboost_url,
     "mlr3cmprsk",
