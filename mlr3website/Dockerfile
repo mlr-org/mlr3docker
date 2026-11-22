@@ -42,6 +42,7 @@ pak::pak(c(
     "bestNormalize",
     "betacal",
     "bst",
+    "butcher",
     "clue",
     "cowplot",
     "DataExplorer",
